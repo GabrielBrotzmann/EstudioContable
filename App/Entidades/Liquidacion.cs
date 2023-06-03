@@ -12,16 +12,9 @@ namespace EstudioContable.Entidades
         private int idEmpleado { get; }
         private int periodo { get; }
         private string codigoTransferencia { get; }
-
-        public double bruto;
-
-        public double descuento;
+        private double bruto;
+        private double descuento;
         private DateTime fechaAlta { get; }
-
         
-
-
-
-
     }
 }

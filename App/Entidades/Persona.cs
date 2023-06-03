@@ -9,9 +9,8 @@ namespace EstudioContable.Entidades
     public abstract class Persona
     {
 
-        String nombre;
-        String apellido;
-        DateTime fechaNacimiento;
-
+        protected String nombre;
+        protected String apellido;
+        protected DateTime fechaNacimiento;
     }
 }
