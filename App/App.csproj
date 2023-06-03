@@ -114,7 +114,9 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="App_Start\RouteConfig.cs" />
-        <Compile Include="Controllers\HomeController.cs" />
+        <Compile Include="Entidades\Empleado.cs" />
+        <Compile Include="Entidades\Liquidacion.cs" />
+        <Compile Include="Entidades\Persona.cs" />
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
@@ -132,6 +134,9 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="packages.config" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Controllers\" />
     </ItemGroup>
     <PropertyGroup>
         <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
