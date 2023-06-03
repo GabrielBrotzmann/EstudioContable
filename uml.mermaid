@@ -13,6 +13,8 @@ classDiagram
         -Int64 Cuil
         -Date FechaAlta
         +AgregarLiquidacion(liquidacion Liquidacion)
+        +ObtenerLiquidaciones()  List~Liquidacion~
+        +ObtenerCategoria() Categoria
     }
     class Empresa {
         -Int32 Id
