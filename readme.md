@@ -1,7 +1,6 @@
 # Estudio Contable Springfield
 
-La maestra Edna Krabappel, cansada de las bromas de Bart Simpson, decide dejar el colegio y  
-abrir un estudio contable, para así tener mayor autonomía y más tranquilidad. 
+La maestra Edna Krabappel, cansada de las bromas de Bart Simpson, decide dejar el colegio y abrir un estudio contable, para así tener mayor autonomía y más tranquilidad. 
 El estudio, en principio, tiene como objetivo hacerse cargo de la liquidación de sueldos de los empleados de 
 distintas empresas, por lo que Edna se enfrenta a su primer problema ¿Cómo administrar cada empresa por separado? 
 Por esto, decide incorporar un sistema que le ayude a gestionar el gran volumen de
