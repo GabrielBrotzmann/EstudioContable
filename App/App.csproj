@@ -113,20 +113,14 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="App_Start\BundleConfig.cs" />
-        <Compile Include="App_Start\FilterConfig.cs" />
         <Compile Include="App_Start\RouteConfig.cs" />
         <Compile Include="Controllers\HomeController.cs" />
-        <Compile Include="Entidades\Empleado.cs" />
-        <Compile Include="Entidades\Liquidacion.cs" />
-        <Compile Include="Entidades\Persona.cs" />
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="favicon.ico" />
         <Content Include="Global.asax" />
         <Content Include="Web.config" />
         <Content Include="Web.Debug.config">
