@@ -12,10 +12,7 @@ namespace EstudioContable
     {
         static void Main(string[] args)
         {
-            
-            
-            
-
+            //test
 
         }
     }
