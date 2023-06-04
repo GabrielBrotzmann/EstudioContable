@@ -18,10 +18,5 @@ namespace EstudioContable.Entidades
         public double descuento;
         private DateTime fechaAlta { get; }
 
-        
-
-
-
-
     }
 }
