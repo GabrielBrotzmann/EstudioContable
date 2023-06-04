@@ -141,6 +141,21 @@ namespace EstudioContable.Negocio
 
             return null;
         }
+        
+        public List<Liquidacion> GetLiquidacionByEmpleado(int idEmpleado)
+        {
+            List<Liquidacion> liquidacionPorEmpleado = new List<Liquidacion>();
+            List<Liquidacion> liquidaciones = _liquidacionDatos.TraerTodos();
+            foreach (Liquidacion liquidacion in liquidaciones)
+            {
+                if (liquidacion.EsDeEmpleado(idEmpleado))
+                {
+                    liquidacionPorEmpleado.Add(liquidacion);
+                }
+            }
+
+            return liquidacionPorEmpleado;
+        }
 
 
         #endregion
