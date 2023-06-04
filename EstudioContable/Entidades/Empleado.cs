@@ -28,6 +28,11 @@ namespace EstudioContable.Entidades
         public DateTime FechaNacimiento { get { return _fechaNacimiento; } set { _fechaNacimiento = value; } }
         public DateTime FechaAlta { get { return _fechaAlta; } set { _fechaAlta = value; } }
         public bool Activo { get { return _activo; } set { _activo = value; } }
+        
+        public bool EsCategoria(int idCategoria)
+        {
+            return _idCategoria == idCategoria;
+        }
 
         public override string ToString()
         {
@@ -36,7 +41,5 @@ namespace EstudioContable.Entidades
                 "APELLIDO " + Apellido + "  " +
                 "FECHA DE ALTA: " + FechaAlta.ToString("dd - MM - yyyy");
         }
-
-
     }
 }

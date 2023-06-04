@@ -25,9 +25,7 @@ namespace EstudioContable.Negocio
         #region Métodos para Listas
         public List<Empleado> GetListaEmpleados()
         {
-            List<Empleado> list = _empleadoDatos.TraerTodos();
-
-            return list;
+            return _empleadoDatos.TraerTodos();
         }
         public List<Empresa> GetListaEmpresa()
         {
@@ -46,6 +44,21 @@ namespace EstudioContable.Negocio
             List<Liquidacion> list = _liquidacionDatos.TraerTodos();
 
             return list;
+        }
+
+        public List<Empleado> GetEmpleadosByCategoria(int idCategoria)
+        {
+            List<Empleado> empleadosPorCategoria = new List<Empleado>();
+            List<Empleado> empleados = _empleadoDatos.TraerTodos();
+            foreach (Empleado empleado in empleados)
+            {
+                if (empleado.EsCategoria(idCategoria))
+                {
+                    empleadosPorCategoria.Add(empleado);
+                }
+            }
+
+            return empleadosPorCategoria;
         }
 
         #endregion
@@ -194,69 +207,31 @@ namespace EstudioContable.Negocio
             {
                 if(idEmpresa == e.IdEmpresa)
                 {
-                    reporte.Append(e);
+                    reporte.Append(e + "\n");
                 }
             }
             return reporte.ToString();
         }
 
-        //REPORTE LIQUIDACION POR CATEGORIA
-    
-
-
-        public List<Empleado> GetEmpleadoByIdCategoria(int idCategoria)
+        //REPORTE LIQUIDACION POR CATEGORIA7
+        public string ReporteGetByIdCategoria(int idCategoria)
         {
-            List<Empleado> empleados = new List<Empleado>();
-            List<Empleado> _empleados = GetListaEmpleados();
-            foreach (Empleado e in _empleados)
+            StringBuilder reporte = new StringBuilder();
+            List<Liquidacion> liquidaciones = GetListaLiquidacion();
+            List<Empleado> empleados = GetEmpleadosByCategoria(idCategoria);
             {
-                if (idCategoria == e.IdCategoria)
+                foreach (Liquidacion liquidacion in liquidaciones)
                 {
-                    empleados.Add(e);
-
-                }
-            }
-            if (empleados == null)
-            {
-                throw new Exception();
-            }
-            else
-            {
-                return empleados;
-            }
-
-        }
-
-        public List<Liquidacion> ReporteGetByIdCategoria(List<Empleado> empleados)
-        {
-            List<Liquidacion> liquidaciones = new List<Liquidacion>();
-            List<Liquidacion> _liquidaciones = GetListaLiquidacion();
-
-            {
-                foreach(Empleado e in empleados)
-                {
-
-                    foreach (Liquidacion l in _liquidaciones)
+                    foreach (Empleado empleado in empleados)
                     {
-                        if (e.Id == l.IdEmpleado)
+                        if (liquidacion.EsDeEmpleado(empleado.Id))
                         {
-                            liquidaciones.Add(l);
-
+                            reporte.Append(liquidacion + "\n");
                         }
                     }
-                  
                 }
-                if (liquidaciones == null)
-                {
-                    throw new Exception();
-                }
-                else
-                {
-                    return liquidaciones;
-                }
+                return reporte.ToString();
             }
-
-
         }
         #endregion
 

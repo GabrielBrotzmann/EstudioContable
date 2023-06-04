@@ -20,11 +20,15 @@ namespace EstudioContable
                     Console.WriteLine(
                         "Menu principal: \n " +
                         "1: Consultar Clientes \n " +
-                        "2: Comenzar selección por Roberto \n " +
-                        "3: Mostrar en pantalla cuantas personas fueron entrevistadas \n " +
-                        "4: Mostrar en pantalla cuantas personas fueron seleccionados positivamente \n " +
-                        "5: Mostrar en pantalla el promedio de sueldos de las personas seleccionadas \n " +
-                        "6: Reporte de empleados por empresa \n " +
+                        "2: Ingresar Clientes \n " +
+                        "3: Consultar empresa por empleado \n " +
+                        "4: Ingresar empresa por empleado \n " +
+                        "5: Consultar liquidaciones por empleado \n " +
+                        "6: Ingresar liquidaciones por empleado \n " +
+                        "7: Consultar categorias por empleado \n " +
+                        "8: Ingresar categorias por empleado \n " +
+                        "9: Reporte de empleados por empresa \n " +
+                        "10: Reporte de las liquidaciones por categoria \n " +
                         "0: Salir");
                     int opcion = -1;
 
@@ -52,7 +56,7 @@ namespace EstudioContable
                             break;
                         case 5:
                             break;
-                        case 6:
+                        case 9:
                             Console.WriteLine("Ingrese el id de la empresa:");
                             if (!int.TryParse(Console.ReadLine(), out opcion))
                             {
@@ -65,6 +69,20 @@ namespace EstudioContable
                                 break;
                             }
                             Console.WriteLine(negocio.ReporteGetByIdEmpresa(opcion));
+                            break;
+                        case 10:
+                            Console.WriteLine("Ingrese el id de la categoria:");
+                            if (!int.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El id de la empresa debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("El id de la empresa debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            Console.WriteLine(negocio.ReporteGetByIdCategoria(opcion));
                             break;
                         case 0:
                             return;

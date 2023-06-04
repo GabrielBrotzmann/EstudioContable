@@ -40,5 +40,10 @@ namespace EstudioContable.Entidades
                 "BRUTO: $" + Bruto.ToString() + "  " +
                 "DESCUENTOS: $" + Descuentos.ToString();
         }
+
+        public bool EsDeEmpleado(int idEmpleado)
+        {
+            return _idEmpleado == idEmpleado;
+        }
     }
 }
