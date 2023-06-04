@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using EstudioContable.AccesoDatos;
 using EstudioContable.Entidades;
 using EstudioContable.Utilidades;
@@ -8,17 +9,17 @@ namespace EstudioContable.Negocio
 {
     public class EstudioNegocio
     {
-        public EmpleadoDatos _empleadoDatos;
-        public EmpresaDatos _empresaDatos;
-        public CategoriaDatos _categoriaDatos;
-        public LiquidacionDatos _liquidacionDatos;
+        private readonly EmpleadoDatos _empleadoDatos;
+        private readonly EmpresaDatos _empresaDatos;
+        private readonly CategoriaDatos _categoriaDatos;
+        private readonly LiquidacionDatos _liquidacionDatos;
 
-        public EstudioNegocio()
+        public EstudioNegocio(EmpleadoDatos empleadoDatos, EmpresaDatos empresaDatos, CategoriaDatos categoriaDatos, LiquidacionDatos liquidacionDatos)
         {
-            _empleadoDatos = new EmpleadoDatos();
-            _empresaDatos = new EmpresaDatos();
-            _categoriaDatos = new CategoriaDatos();
-            _liquidacionDatos = new LiquidacionDatos();
+            _empleadoDatos = empleadoDatos;
+            _empresaDatos = empresaDatos;
+            _categoriaDatos = categoriaDatos;
+            _liquidacionDatos = liquidacionDatos;
         }
 
         #region Métodos para Listas
@@ -66,8 +67,7 @@ namespace EstudioContable.Negocio
         #endregion
 
         #region Métodos por Id
-
-
+        
         public Empleado GetByIdEmpleado(int idEmpleado)
         {
 
@@ -186,28 +186,18 @@ namespace EstudioContable.Negocio
         #endregion
 
         #region Métodos Reportes
-        //REPORTE EMPLEADO POR EMPRESA
-        public List<Empleado> ReporteGetByIdEmpresa(int idEmpresa)
+        public string ReporteGetByIdEmpresa(int idEmpresa)
         {
-            List<Empleado> empleados = new List<Empleado>();
-            List<Empleado> _empleados = GetListaEmpleados();
-            foreach(Empleado e in _empleados)
+            StringBuilder reporte = new StringBuilder();
+            List<Empleado> empleados = GetListaEmpleados();
+            foreach(Empleado e in empleados)
             {
                 if(idEmpresa == e.IdEmpresa)
                 {
-                    empleados.Add(e);
-                    
+                    reporte.Append(e);
                 }
             }
-           if( empleados == null)
-            {
-                throw new Exception();
-            }
-            else
-            {
-                return empleados;
-            }
-           
+            return reporte.ToString();
         }
 
         //REPORTE LIQUIDACION POR CATEGORIA

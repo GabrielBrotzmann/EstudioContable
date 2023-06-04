@@ -31,7 +31,7 @@ namespace EstudioContable.Entidades
 
         public override string ToString()
         {
-            return "ID: " + Id.ToString() + "  " +
+            return "ID: " + Id + "  " +
                 "NOMBRE: " + Nombre + "  " +
                 "APELLIDO " + Apellido + "  " +
                 "FECHA DE ALTA: " + FechaAlta.ToString("dd - MM - yyyy");
