@@ -8,7 +8,6 @@ namespace EstudioContable
         {
             //Menu
             bool programa = true;
-
             do {
                 bool menu = true;
                 do
@@ -51,9 +50,7 @@ namespace EstudioContable
                         case 5:
                             break;
                         case 0:
-                            menu = false;
-                            programa = false;
-                            break;
+                            return;
                         default:
                             Console.WriteLine("Opcion invalida, intente nuevamente");
                             Console.WriteLine("Presione enter para continuar");

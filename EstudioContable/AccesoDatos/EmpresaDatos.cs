@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using EstudioContable.AccesoDatos.Utilidades;
+﻿using System.Collections.Generic;
 using EstudioContable.Entidades;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EstudioContable.Utilidades;
 
 
 namespace EstudioContable.AccesoDatos
@@ -44,25 +39,25 @@ namespace EstudioContable.AccesoDatos
             return lst;
         }
 
-        public TransactionResult InsertarEmpresa(Empresa empresa)
+        public Response InsertarEmpresa(Empresa empresa)
         {
             NameValueCollection obj = ReverseMapEmpresa(empresa); //serializacion -> json
 
             string json = WebHelper.Post("EstudioContable/Empresa", obj);
 
-            TransactionResult lst = JsonConvert.DeserializeObject<TransactionResult>(json);
+            Response lst = JsonConvert.DeserializeObject<Response>(json);
 
             return lst;
         }
 
 
-        public TransactionResult ActualizarEmpresa(Empresa empresa)
+        public Response ActualizarEmpresa(Empresa empresa)
         {
             NameValueCollection obj = ReverseMapEmpresa(empresa);
 
             string json = WebHelper.Put("EstudioContable/Empresa", obj);
 
-            TransactionResult lst = JsonConvert.DeserializeObject<TransactionResult>(json);
+            Response lst = JsonConvert.DeserializeObject<Response>(json);
 
             return lst;
         }

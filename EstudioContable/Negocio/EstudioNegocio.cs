@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using EstudioContable.AccesoDatos;
 using EstudioContable.Entidades;
+using EstudioContable.Utilidades;
 
 namespace EstudioContable.Negocio
 {
@@ -136,7 +138,7 @@ namespace EstudioContable.Negocio
             Empleado empleado = new Empleado(id,idEmpresa,nombre,apellido, idCategoria, cuil,fnac,fechaAlta, true);
 
 
-            TransactionResult transaction = _empleadoDatos.Insertar(empleado);
+            Response transaction = _empleadoDatos.Insertar(empleado);
 
 
 
@@ -147,7 +149,7 @@ namespace EstudioContable.Negocio
         {
             Empresa empresa = new Empresa(razonSocial,cuit,domicilio,fechaAlta,usuario,id);
 
-            TransactionResult transaction = _empresaDatos.InsertarEmpresa(empresa);
+            Response transaction = _empresaDatos.InsertarEmpresa(empresa);
 
 
 
@@ -161,7 +163,7 @@ namespace EstudioContable.Negocio
             Categoria categoria = new Categoria(nombre, convenio, sueldoBasico, id);
            
 
-            TransactionResult transaction = _categoriaDatos.InsertarCategoria(categoria);
+            Response transaction = _categoriaDatos.InsertarCategoria(categoria);
 
 
             if (!transaction.IsOk)
@@ -174,7 +176,7 @@ namespace EstudioContable.Negocio
             Liquidacion liquidacion = new Liquidacion(idEmpleado, periodo, codigoTransferencia, bruto, descuentos,fechaAlta, id);
 
 
-            TransactionResult transaction = _liquidacionDatos.InsertarLiquidacion(liquidacion);
+            Response transaction = _liquidacionDatos.InsertarLiquidacion(liquidacion);
 
 
             if (!transaction.IsOk)

@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EstudioContable.AccesoDatos.Utilidades
+namespace EstudioContable.Utilidades
 {
     public static class WebHelper
     {

@@ -1,66 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EstudioContable.Entidades
 {
     public class Empleado : Persona
     {
-        private int _idEmpleado;
-
+   
         private int _idEmpresa;
+        private int _idCategoria;
+        private long _cuil;
+        private DateTime _fechaNacimiento;
+        private DateTime _fechaAlta;
+        private bool _activo;
 
-        private int _categoriaEmpleado;
-
-        private int _cuil;
-
-        private DateTime _fechaAltaEmpleado;
-
-        private List<Liquidacion> _liquidaciones;
-
-
-        public int idEmpleado { get => _idEmpleado; set => _idEmpleado = value; }
-
-        public int idEmpresa { get => _idEmpresa; set => _idEmpresa = value; }
-
-        public int categoriaEmpleado { get => _categoriaEmpleado; set => _categoriaEmpleado = value; }
-
-        public int cuil { get => _cuil; set => _cuil = value; }
-
-        public DateTime fechaAltaEmpleado { get => _fechaAltaEmpleado; set => _fechaAltaEmpleado = value; }
-
-        public List<Liquidacion> liquidaciones { get => _liquidaciones; set => _liquidaciones = value; }
-
-
-        public Empleado() {
-           
-        }
-
-
-
-
-        public void ingresarLiquidacion()
+        public Empleado(int id, int idEmpresa,string nombre,string apellido, int idCategoria, long cuil, DateTime fechaNacimiento, DateTime fechaAlta, bool activo) :  base (id,  nombre,  apellido )
         {
-
+            _idEmpresa = idEmpresa;
+            _idCategoria = idCategoria;
+            _cuil = cuil;
+            _fechaNacimiento = fechaNacimiento;
+            _fechaAlta = fechaAlta;
+            _activo = activo;
         }
 
-        public Liquidacion consultaLiquidacionEmpleado ()
+        public int IdEmpresa { get { return _idEmpresa; } set { _idEmpresa = value; } }
+        public int IdCategoria { get { return _idCategoria; } set { _idCategoria = value; } }
+        public long Cuil { get { return _cuil; } set { _cuil = value; } }
+        public DateTime FechaNacimiento { get { return _fechaNacimiento; } set { _fechaNacimiento = value; } }
+        public DateTime FechaAlta { get { return _fechaAlta; } set { _fechaAlta = value; } }
+        public bool Activo { get { return _activo; } set { _activo = value; } }
+
+        public override string ToString()
         {
-
-            return new Liquidacion();
+            return "ID: " + Id.ToString() + "  " +
+                "NOMBRE: " + Nombre + "  " +
+                "APELLIDO " + Apellido + "  " +
+                "FECHA DE ALTA: " + FechaAlta.ToString("dd - MM - yyyy");
         }
-
-
-
-
-        
-
-
-
-
-
 
 
     }
