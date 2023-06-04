@@ -8,19 +8,37 @@ namespace EstudioContable.Entidades
 {
     public class Empleado : Persona
     {
-        private int idEmpleado { get; set; }
-        
-        private int idEmpresa { get; set; }
+        private int _idEmpleado;
 
-        private int categoriaEmpleado {get;set;}
+        private int _idEmpresa;
 
-        private int cuil { get; set; }
+        private int _categoriaEmpleado;
 
-        public DateTime fechaAltaEmpleado;
+        private int _cuil;
 
-        public List<Liquidacion> liquidaciones;
+        private DateTime _fechaAltaEmpleado;
 
-        public Empleado() { }
+        private List<Liquidacion> _liquidaciones;
+
+
+        public int idEmpleado { get => _idEmpleado; set => _idEmpleado = value; }
+
+        public int idEmpresa { get => _idEmpresa; set => _idEmpresa = value; }
+
+        public int categoriaEmpleado { get => _categoriaEmpleado; set => _categoriaEmpleado = value; }
+
+        public int cuil { get => _cuil; set => _cuil = value; }
+
+        public DateTime fechaAltaEmpleado { get => _fechaAltaEmpleado; set => _fechaAltaEmpleado = value; }
+
+        public List<Liquidacion> liquidaciones { get => _liquidaciones; set => _liquidaciones = value; }
+
+
+        public Empleado() {
+           
+        }
+
+
 
 
         public void ingresarLiquidacion()

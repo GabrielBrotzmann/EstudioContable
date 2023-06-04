@@ -63,7 +63,6 @@ namespace EstudioContable
                 } while (menu);
                 Console.ReadKey();
             } while (programa);
-
         }
     }
 }
