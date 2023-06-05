@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Text;
 using EstudioContable.AccesoDatos;
 using EstudioContable.Entidades;
@@ -22,7 +23,7 @@ namespace EstudioContable.Negocio
             _liquidacionDatos = liquidacionDatos;
         }
 
-        #region Métodos para Listas
+        //Listas
         public List<Empleado> GetListaEmpleados()
         {
             return _empleadoDatos.TraerTodos();
@@ -61,25 +62,8 @@ namespace EstudioContable.Negocio
             return empleadosPorCategoria;
         }
 
-        #endregion
 
-        #region Métodos que devuelven Objetos
-
-        public Categoria TraerCategoria(Categoria categoria)
-        {
-            // validar cliente no nulo
-
-            return _categoriaDatos.TraerPorIdCategoria(categoria.Id);
-        }
-        public Liquidacion TraerLiquidacion(Liquidacion liquidacion)
-        {
-            // validar cliente no nulo
-
-            return _liquidacionDatos.TraerPorIdLiquidacion(liquidacion.Id);
-        }
-        #endregion
-
-        #region Métodos por Id
+        // Get by Id
         
         public Empleado GetByIdEmpleado(int idEmpleado)
         {
@@ -141,30 +125,20 @@ namespace EstudioContable.Negocio
 
             return null;
         }
-        
-        public List<Liquidacion> GetLiquidacionByEmpleado(int idEmpleado)
-        {
-            List<Liquidacion> liquidacionPorEmpleado = new List<Liquidacion>();
-            List<Liquidacion> liquidaciones = _liquidacionDatos.TraerTodos();
-            foreach (Liquidacion liquidacion in liquidaciones)
-            {
-                if (liquidacion.EsDeEmpleado(idEmpleado))
-                {
-                    liquidacionPorEmpleado.Add(liquidacion);
-                }
-            }
 
-            return liquidacionPorEmpleado;
+        public Categoria TraerCategoria(Categoria categoria)
+        {
+            return _categoriaDatos.TraerPorIdCategoria(categoria.Id);
+        }
+        public Liquidacion TraerLiquidacion(Liquidacion liquidacion)
+        {
+            return _liquidacionDatos.TraerPorIdLiquidacion(liquidacion.Id);
         }
 
-
-        #endregion
-
-        #region Métodos de Altas
+        //Altas
         public void AltaEmpleado(int id, int idCategoria, int idEmpresa, string nombre, string apellido, long cuil, DateTime fnac, DateTime fechaAlta, bool activo)
         {
             Empleado empleado = new Empleado(id,idEmpresa,nombre,apellido, idCategoria, cuil,fnac,fechaAlta, true);
-
 
             Response transaction = _empleadoDatos.Insertar(empleado);
 
@@ -189,7 +163,6 @@ namespace EstudioContable.Negocio
         public void AltaCategoria(string nombre, string convenio, double sueldoBasico, int id)
         {
             Categoria categoria = new Categoria(nombre, convenio, sueldoBasico, id);
-           
 
             Response transaction = _categoriaDatos.InsertarCategoria(categoria);
 
@@ -203,7 +176,6 @@ namespace EstudioContable.Negocio
         {
             Liquidacion liquidacion = new Liquidacion(idEmpleado, periodo, codigoTransferencia, bruto, descuentos,fechaAlta, id);
 
-
             Response transaction = _liquidacionDatos.InsertarLiquidacion(liquidacion);
 
 
@@ -211,9 +183,9 @@ namespace EstudioContable.Negocio
                 throw new Exception(transaction.Error);
         }
 
-        #endregion
 
-        #region Métodos Reportes
+
+        //Reportes
         public string ReporteGetByIdEmpresa(int idEmpresa)
         {
             StringBuilder reporte = new StringBuilder();
@@ -228,7 +200,7 @@ namespace EstudioContable.Negocio
             return reporte.ToString();
         }
 
-        //REPORTE LIQUIDACION POR CATEGORIA7
+        
         public string ReporteGetByIdCategoria(int idCategoria)
         {
             StringBuilder reporte = new StringBuilder();
@@ -250,7 +222,7 @@ namespace EstudioContable.Negocio
         }
         #endregion
 
-        #region Métodos para Validar ID Existente
+        //Validaciones
         public bool ValidarEmpleadoExistente(int id)
         {
             bool resultado = false;
@@ -327,7 +299,7 @@ namespace EstudioContable.Negocio
             }
             return resultado;
         }
-        #endregion
+        
 
     }
 }

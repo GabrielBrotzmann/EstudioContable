@@ -19,8 +19,8 @@ namespace EstudioContable
                     Console.Clear();
                     Console.WriteLine(
                         "Menu principal: \n " +
-                        "1: Consultar Clientes \n " +
-                        "2: Ingresar Clientes \n " +
+                        "1: Ingresar Empleado \n " +
+                        "2: Consultar Empleado \n " +
                         "3: Consultar empresa por empleado \n " +
                         "4: Ingresar empresa por empleado \n " +
                         "5: Consultar liquidaciones por empleado \n " +
@@ -47,15 +47,20 @@ namespace EstudioContable
                     switch (opcion)
                     {
                         case 1:
-                            break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            Console.WriteLine("Ingrese el id del empleado:");
+                            Console.WriteLine("Ingrese el id del nuevo empleado:");
+                            if (!int.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El id del empleado debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("El id del empleado debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            int id = opcion;
+
+                            Console.WriteLine("Ingrese el id de la categoria del nuevo empleado:");
                             if (!int.TryParse(Console.ReadLine(), out opcion))
                             {
                                 Console.WriteLine("El id debe ser numerico, vuelva a intentarlo");
@@ -66,8 +71,71 @@ namespace EstudioContable
                                 Console.WriteLine("El id debe ser numerico, vuelva a intentarlo");
                                 break;
                             }
-                            Console.WriteLine(negocio.GetLiquidacionByEmpleado(opcion));
+                            if (!negocio.ValidarCategoriaExistente(opcion))
+                            {
+                                Console.WriteLine("No se encontro la categoria, vuelva a intentarlo");
+                                break;
+                            }
+                            int idCategoria = opcion;
+                            
+                            Console.WriteLine("Ingrese el id de la empresa del nuevo empleado:");
+                            if (!int.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El id debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("El id debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (!negocio.ValidarEmpresaExistente(opcion))
+                            {
+                                Console.WriteLine("No se encontro la categoria, vuelva a intentarlo");
+                                break;
+                            }
+                            int idEmpresa = opcion;
+                           
+                            Console.WriteLine("Ingrese el nombre del nuevo empleado:");
+                            string nombre = Console.ReadLine();
+
+                            Console.WriteLine("Ingrese el apellido del nuevo empleado:");
+                            string apellido = Console.ReadLine();
+
+                            Console.WriteLine("Ingrese el cuil del nuevo empleado sin guiones:");
+                            if (!long.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El cuil debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("Ha ocurrido un error, vuelva a intentarlo");
+                                break;
+                            }
+                            long cuil = opcion;
+
+                            Console.WriteLine("Ingrese la fecha de nacimiento del nuevo empleado en formato DD/MM/YYYY:");
+                            string fnac = Console.ReadLine();
+                            DateTime fNac = DateTime.Parse(fnac);
+
+                            DateTime fAlta = DateTime.Today();
+
+
+                            negocio.AltaEmpleado(id,idCategoria,idEmpresa,nombre,apellido,cuil,fNac, fAlta, true);
+
+                            Console.WriteLine("El empleado ha sido agregado");
                             break;
+
+
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
                             break;
                         case 9:
                             Console.WriteLine("Ingrese el id de la empresa:");
