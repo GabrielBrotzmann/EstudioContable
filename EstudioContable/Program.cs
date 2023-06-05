@@ -238,6 +238,18 @@ namespace EstudioContable
 
                             break;
                         case 5:
+                            Console.WriteLine("Ingrese el id del empleado:");
+                            if (!int.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El id debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("El id debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            Console.WriteLine(negocio.GetLiquidacionByEmpleado(opcion));
                             break;
                         case 9:
                             Console.WriteLine("Ingrese el id de la empresa:");
