@@ -251,6 +251,35 @@ namespace EstudioContable
                             }
                             Console.WriteLine(negocio.GetLiquidacionByEmpleado(opcion));
                             break;
+                        case 6:
+                            Console.WriteLine("Ingrese el id del empleado:");
+                            if (!int.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El id debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("El id debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            int idempleado = opcion;
+                            Console.WriteLine("Ingrese el periodo de la liquidacion:");
+                            int periodo = Console.ReadLine();
+                            Console.WriteLine("Ingrese el codigo de transferencia:");
+                            string codtransferencia = Console.ReadLine();
+                            Console.WriteLine("Ingrese el salario bruto:");
+                            double bruto = Console.ReadLine();
+                            Console.WriteLine("Ingrese el descuento:");
+                            int descuento = Console.ReadLine();
+                            Console.WriteLine("Ingrese la fecha de alta:");
+                            DateTime fechaalta= Console.ReadLine();
+                            Console.WriteLine("Ingrese el id:");
+                            int id = Console.ReadLine();
+
+                            negocio.AltaLiquidacion(idempleado, periodo, codtransferencia, bruto, descuentos, fechaalta, id);
+                            Console.WriteLine("Liquidación ingresada");
+                            break;
                         case 9:
                             Console.WriteLine("Ingrese el id de la empresa:");
                             if (!int.TryParse(Console.ReadLine(), out opcion))
