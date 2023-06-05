@@ -59,6 +59,7 @@ namespace EstudioContable
                                 break;
                             }
                             int id = opcion;
+                            opcion = -1;
 
                             Console.WriteLine("Ingrese el id de la categoria del nuevo empleado:");
                             if (!int.TryParse(Console.ReadLine(), out opcion))
@@ -77,7 +78,8 @@ namespace EstudioContable
                                 break;
                             }
                             int idCategoria = opcion;
-                            
+                            opcion = -1;
+
                             Console.WriteLine("Ingrese el id de la empresa del nuevo empleado:");
                             if (!int.TryParse(Console.ReadLine(), out opcion))
                             {
@@ -95,7 +97,8 @@ namespace EstudioContable
                                 break;
                             }
                             int idEmpresa = opcion;
-                           
+                            opcion = -1;
+
                             Console.WriteLine("Ingrese el nombre del nuevo empleado:");
                             string nombre = Console.ReadLine();
 
@@ -114,6 +117,7 @@ namespace EstudioContable
                                 break;
                             }
                             long cuil = opcion;
+                            opcion = -1;
 
                             Console.WriteLine("Ingrese la fecha de nacimiento del nuevo empleado en formato DD/MM/YYYY:");
                             string fnac = Console.ReadLine();
@@ -130,10 +134,108 @@ namespace EstudioContable
 
                             break;
                         case 2:
+                            Console.WriteLine("Ingrese el id del empleado:");
+                            if (!int.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El id del empleado debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("El id del empleado debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if(negocio.ValidarEmpleadoExistente(opcion))
+                            {
+                                Empleado emp = negocio.GetByIdEmpleado(opcion);
+                                Console.WriteLine(emp.ToString());
+                                break;
+                            }
+
                             break;
                         case 3:
+                            Console.WriteLine("Ingrese el id del nuevo cliente:");
+                            if (!int.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El id del cliente debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("El id del cliente debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (negocio.ValidarEmpresaExistente(opcion))
+                            {
+                                Console.WriteLine("Ya existe un cliente con ese id, pruebe con otro");
+                            }
+                            int id = opcion;
+                            opcion = -1;
+
+                            Console.WriteLine("Ingrese la razon social del nuevo cliente:");
+                            string razSoc = Console.ReadLine();
+
+                            Console.WriteLine("Ingrese el cuil del nuevo cliente sin guiones:");
+                            if (!long.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El cuil del cliente debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("El cuil del cliente debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            long cuil = opcion;
+                            opcion = -1;
+
+                            Console.WriteLine("Ingrese el domicilio del cliente");
+                            string dom = Console.ReadLine();
+
+                            DateTime fAlta = DateTime.Today();
+
+                            int idEmpl;
+                            Console.WriteLine("Ingrese el id del empleado asignado al cliente:");
+                            if (!int.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El id del empleado debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("El id del empleado debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (negocio.ValidarEmpleadoExistente(opcion))
+                            {
+                                idEmp = opcion;
+                            }
+                            else { Console.WriteLine("El id ingresado no corresponde a ningun empleado")}
+                            opcion = -1;
+
+                            negocio.AltaEmpresa(razSoc, cuil, dom, fAlta, idEmpl, id);
+                            Console.WriteLine("El cliente fue ingresado con exito");
+
                             break;
                         case 4:
+                            Console.WriteLine("Ingrese el id de la empresa:");
+                            if (!int.TryParse(Console.ReadLine(), out opcion))
+                            {
+                                Console.WriteLine("El id de la empresa debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (opcion < 0)
+                            {
+                                Console.WriteLine("El id de la empresa debe ser numerico, vuelva a intentarlo");
+                                break;
+                            }
+                            if (negocio.ValidarEmpresaExistente)
+                            {
+                                Empresa emp = negocio.GetByIdEmpresa(opcion);
+                                Console.WriteLine(emp.ToString());
+                                break;
+                            }
+
                             break;
                         case 5:
                             break;
