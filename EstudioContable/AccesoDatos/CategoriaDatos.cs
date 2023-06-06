@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using EstudioContable.AccesoDatos.Utilidades;
 using EstudioContable.Utilidades;
 
 namespace EstudioContable.AccesoDatos

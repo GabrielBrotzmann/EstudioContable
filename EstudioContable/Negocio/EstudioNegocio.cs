@@ -235,7 +235,6 @@ namespace EstudioContable.Negocio
                 return reporte.ToString();
             }
         }
-        #endregion
 
         //Validaciones
         public bool ValidarEmpleadoExistente(int id)

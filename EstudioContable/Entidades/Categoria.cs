@@ -7,9 +7,7 @@
         private string _convenio;
         private double _sueldoBasico;
 
-     
-
-        public Categoria( string nombre, string convenio, double sueldoBasico, int id)
+        public Categoria( string nombre, string convenio, double sueldoBasico, int id)  //TODO: No recibir el id por parametro, setearlo en el constructor
         {
             
             _nombre = nombre;

@@ -1,5 +1,6 @@
 ﻿using System;
 using EstudioContable.AccesoDatos;
+using EstudioContable.Entidades;
 using EstudioContable.Negocio;
 
 namespace EstudioContable
@@ -58,7 +59,7 @@ namespace EstudioContable
                                 Console.WriteLine("El id del empleado debe ser numerico, vuelva a intentarlo");
                                 break;
                             }
-                            int id = opcion;
+                            int idEmpleado = opcion;
                             opcion = -1;
 
                             Console.WriteLine("Ingrese el id de la categoria del nuevo empleado:");
@@ -105,33 +106,30 @@ namespace EstudioContable
                             Console.WriteLine("Ingrese el apellido del nuevo empleado:");
                             string apellido = Console.ReadLine();
 
-                            Console.WriteLine("Ingrese el cuil del nuevo empleado sin guiones:");
-                            if (!long.TryParse(Console.ReadLine(), out opcion))
+                            Console.WriteLine("Ingrese el cuit del nuevo empleado sin guiones:");
+                            long cuitIngresado = -1;
+                            if (!long.TryParse(Console.ReadLine(), out cuitIngresado))
                             {
                                 Console.WriteLine("El cuil debe ser numerico, vuelva a intentarlo");
                                 break;
                             }
-                            if (opcion < 0)
+                            if (cuitIngresado < 0)
                             {
                                 Console.WriteLine("Ha ocurrido un error, vuelva a intentarlo");
                                 break;
                             }
-                            long cuil = opcion;
+                            long cuit = cuitIngresado;
                             opcion = -1;
 
                             Console.WriteLine("Ingrese la fecha de nacimiento del nuevo empleado en formato DD/MM/YYYY:");
                             string fnac = Console.ReadLine();
                             DateTime fNac = DateTime.Parse(fnac);
 
-                            DateTime fAlta = DateTime.Today();
-
-
-                            negocio.AltaEmpleado(id,idCategoria,idEmpresa,nombre,apellido,cuil,fNac, fAlta, true);
+                            DateTime fAlta = DateTime.Today;
+                            
+                            negocio.AltaEmpleado(idEmpleado,idCategoria,idEmpresa,nombre,apellido,cuit,fNac, fAlta, true);
 
                             Console.WriteLine("El empleado ha sido agregado");
-                            break;
-
-
                             break;
                         case 2:
                             Console.WriteLine("Ingrese el id del empleado:");
@@ -169,32 +167,33 @@ namespace EstudioContable
                             {
                                 Console.WriteLine("Ya existe un cliente con ese id, pruebe con otro");
                             }
-                            int id = opcion;
+                            int idCliente = opcion;
                             opcion = -1;
 
                             Console.WriteLine("Ingrese la razon social del nuevo cliente:");
                             string razSoc = Console.ReadLine();
 
+                            long cuilIngresado = -1;
                             Console.WriteLine("Ingrese el cuil del nuevo cliente sin guiones:");
-                            if (!long.TryParse(Console.ReadLine(), out opcion))
+                            if (!long.TryParse(Console.ReadLine(), out cuilIngresado))
                             {
                                 Console.WriteLine("El cuil del cliente debe ser numerico, vuelva a intentarlo");
                                 break;
                             }
-                            if (opcion < 0)
+                            if (cuilIngresado < 0)
                             {
                                 Console.WriteLine("El cuil del cliente debe ser numerico, vuelva a intentarlo");
                                 break;
                             }
-                            long cuil = opcion;
+                            long cuil = cuilIngresado;
                             opcion = -1;
 
                             Console.WriteLine("Ingrese el domicilio del cliente");
                             string dom = Console.ReadLine();
 
-                            DateTime fAlta = DateTime.Today();
+                            DateTime fAlta2 = DateTime.Today;
 
-                            int idEmpl;
+                            int idEmpl = 0;
                             Console.WriteLine("Ingrese el id del empleado asignado al cliente:");
                             if (!int.TryParse(Console.ReadLine(), out opcion))
                             {
@@ -208,14 +207,15 @@ namespace EstudioContable
                             }
                             if (negocio.ValidarEmpleadoExistente(opcion))
                             {
-                                idEmp = opcion;
+                                idEmpl = opcion;
                             }
-                            else { Console.WriteLine("El id ingresado no corresponde a ningun empleado")}
+                            else
+                            {
+                                Console.WriteLine("El id ingresado no corresponde a ningun empleado");
+                            }
                             opcion = -1;
-
-                            negocio.AltaEmpresa(razSoc, cuil, dom, fAlta, idEmpl, id);
+                            negocio.AltaEmpresa(razSoc, cuil, dom, fAlta2, idEmpl, idCliente);
                             Console.WriteLine("El cliente fue ingresado con exito");
-
                             break;
                         case 4:
                             Console.WriteLine("Ingrese el id de la empresa:");
@@ -229,7 +229,7 @@ namespace EstudioContable
                                 Console.WriteLine("El id de la empresa debe ser numerico, vuelva a intentarlo");
                                 break;
                             }
-                            if (negocio.ValidarEmpresaExistente)
+                            if (negocio.ValidarEmpresaExistente(opcion))
                             {
                                 Empresa emp = negocio.GetByIdEmpresa(opcion);
                                 Console.WriteLine(emp.ToString());
@@ -263,21 +263,22 @@ namespace EstudioContable
                                 Console.WriteLine("El id debe ser numerico, vuelva a intentarlo");
                                 break;
                             }
+                            //TODO: Agregar validaciones
                             int idempleado = opcion;
                             Console.WriteLine("Ingrese el periodo de la liquidacion:");
-                            int periodo = Console.ReadLine();
+                            int periodo = Convert.ToInt32(Console.ReadLine());
                             Console.WriteLine("Ingrese el codigo de transferencia:");
                             string codtransferencia = Console.ReadLine();
                             Console.WriteLine("Ingrese el salario bruto:");
-                            double bruto = Console.ReadLine();
+                            double bruto = Convert.ToDouble(Console.ReadLine());
                             Console.WriteLine("Ingrese el descuento:");
-                            int descuento = Console.ReadLine();
+                            int descuento = Convert.ToInt32(Console.ReadLine());
                             Console.WriteLine("Ingrese la fecha de alta:");
-                            DateTime fechaalta= Console.ReadLine();
+                            DateTime fechaalta= Convert.ToDateTime(Console.ReadLine());
                             Console.WriteLine("Ingrese el id:");
-                            int id = Console.ReadLine();
+                            int id = Convert.ToInt32(Console.ReadLine());
 
-                            negocio.AltaLiquidacion(idempleado, periodo, codtransferencia, bruto, descuentos, fechaalta, id);
+                            negocio.AltaLiquidacion(idempleado, periodo, codtransferencia, bruto, descuento, fechaalta, id);
                             Console.WriteLine("Liquidación ingresada");
                             break;
                         case 9:

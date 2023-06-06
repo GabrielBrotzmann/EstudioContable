@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using EstudioContable.AccesoDatos.Utilidades;
 using EstudioContable.Utilidades;
 
 
