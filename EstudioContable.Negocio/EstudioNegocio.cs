@@ -4,7 +4,6 @@ using System.Dynamic;
 using System.Text;
 using EstudioContable.AccesoDatos;
 using EstudioContable.Entidades;
-using EstudioContable.Utilidades;
 
 namespace EstudioContable.Negocio
 {
@@ -155,23 +154,13 @@ namespace EstudioContable.Negocio
         {
             Empleado empleado = new Empleado(id,idEmpresa,nombre,apellido, idCategoria, cuil,fnac,fechaAlta, true);
 
-            Response transaction = _empleadoDatos.Insertar(empleado);
-
-
-
-            if (!transaction.IsOk)
-                throw new Exception(transaction.Error);
+            _empleadoDatos.Insertar(empleado);
         }
         public void AltaEmpresa(string razonSocial, long cuit, string domicilio, DateTime fechaAlta, int usuario, int id)
         {
             Empresa empresa = new Empresa(razonSocial,cuit,domicilio,fechaAlta,usuario,id);
 
-            Response transaction = _empresaDatos.InsertarEmpresa(empresa);
-
-
-
-            if (!transaction.IsOk)
-                throw new Exception(transaction.Error);
+            _empresaDatos.InsertarEmpresa(empresa);
         }
              
 
@@ -179,23 +168,14 @@ namespace EstudioContable.Negocio
         {
             Categoria categoria = new Categoria(nombre, convenio, sueldoBasico, id);
 
-            Response transaction = _categoriaDatos.InsertarCategoria(categoria);
-
-
-            if (!transaction.IsOk)
-                throw new Exception(transaction.Error);
-
+            _categoriaDatos.InsertarCategoria(categoria);
         }
                        
         public void AltaLiquidacion(int idEmpleado, int periodo, string codigoTransferencia, double bruto, double descuentos, DateTime fechaAlta, int id)
         {
             Liquidacion liquidacion = new Liquidacion(idEmpleado, periodo, codigoTransferencia, bruto, descuentos,fechaAlta, id);
 
-            Response transaction = _liquidacionDatos.InsertarLiquidacion(liquidacion);
-
-
-            if (!transaction.IsOk)
-                throw new Exception(transaction.Error);
+            _liquidacionDatos.InsertarLiquidacion(liquidacion);
         }
 
 

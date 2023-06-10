@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EstudioContable.Utilidades
+namespace EstudioContable.Entidades
 {
-    public class Response
+    public class TransactionResult
     {
         public bool IsOk { get; set; }
         public int Id { get; set; }
