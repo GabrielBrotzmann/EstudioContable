@@ -1,4 +1,5 @@
 using System.Web.Http;
+using EstudioContable.Entidades;
 using EstudioContable.Negocio;
 
 namespace EstudioContable.Api.Controllers
@@ -20,7 +21,12 @@ namespace EstudioContable.Api.Controllers
             {
                 return BadRequest("idUsuario invalido");
             }
-            return Ok(_empleadoNegocio.GetByIdEmpleado(id)); 
+            Empleado empleado = _empleadoNegocio.GetByIdEmpleado(id);
+            if (empleado != null)
+            {
+                return Ok(empleado);   
+            }
+            return NotFound();
         }
     }
 }

@@ -10,13 +10,7 @@ namespace EstudioContable.Api
 
             string baseRoute = "estudio-contable";
             
-            config.Routes.MapHttpRoute(
-                name: "Health",
-                routeTemplate: "127.0.0.1:5000",
-                defaults: new { controllers = "HealthController", action = "Health" }
-            );
-
-            config.Routes.MapHttpRoute(
+             config.Routes.MapHttpRoute(
                 name: "Empleados",
                 routeTemplate: baseRoute + "/empleados",
                 defaults: new { controllers = "GetEmpleadoById", action = "GetEmpleadoById" }
