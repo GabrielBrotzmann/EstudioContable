@@ -10,7 +10,6 @@ namespace EstudioContable.AccesoDatos.Utilidades
 {
     public static class WebHelper
     {
-
         static WebClient client;
         static string rutaBase;
 
@@ -48,6 +47,7 @@ namespace EstudioContable.AccesoDatos.Utilidades
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return "{ \"isOk\":false,\"id\":-1,\"error\":\"Error en el llamado al servicio\"}";
             }
         }
@@ -66,6 +66,7 @@ namespace EstudioContable.AccesoDatos.Utilidades
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return "{ \"isOk\":false,\"id\":-1,\"error\":\"Error en el llamado al servicio\"}";
             }
         }
@@ -84,6 +85,7 @@ namespace EstudioContable.AccesoDatos.Utilidades
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return "{ \"isOk\":false,\"id\":-1,\"error\":\"Error en el llamado al servicio\"}";
             }
         }

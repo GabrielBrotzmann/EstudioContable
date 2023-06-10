@@ -84,6 +84,21 @@ namespace EstudioContable
 
         public void ConsultarEmpresaPorEmpleado()
         {
+            Console.WriteLine("Ingrese el id de la empresa:");
+            int idEmpresa = Consola.ReadIntFromConsole();
+            if (idEmpresa == -1) return;
+            if (!_empresaNegocio.ValidarEmpresaExistente(idEmpresa))
+            {
+                Console.WriteLine("El id ingresado no corresponde a ninguna empresa");
+                return;
+            }
+
+            Empresa emp = _empresaNegocio.GetByIdEmpresa(idEmpresa);
+            Console.WriteLine(emp.ToString());
+        }
+
+        public void IngresarEmpresaPorEmpleado()
+        {
             Console.WriteLine("Ingrese el id del nuevo cliente:");
             int idCliente = Consola.ReadIntFromConsole();
             if (idCliente == -1) return;
@@ -114,21 +129,6 @@ namespace EstudioContable
 
             _empresaNegocio.AltaEmpresa(razSoc, cuil, dom, DateTime.Today, idEmpl, idCliente);
             Console.WriteLine("El cliente fue ingresado con exito");
-        }
-
-        public void IngresarEmpresaPorEmpleado()
-        {
-            Console.WriteLine("Ingrese el id de la empresa:");
-            int idEmpresa = Consola.ReadIntFromConsole();
-            if (idEmpresa == -1) return;
-            if (!_empresaNegocio.ValidarEmpresaExistente(idEmpresa))
-            {
-                Console.WriteLine("El id ingresado no corresponde a ninguna empresa");
-                return;
-            }
-
-            Empresa emp = _empresaNegocio.GetByIdEmpresa(idEmpresa);
-            Console.WriteLine(emp.ToString());
         }
 
         public void ConsultarLiquidacionesPorEmpleado()
