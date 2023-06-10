@@ -10,29 +10,13 @@ namespace EstudioContable
         static void Main(string[] args)
         {
             var negocio = new EstudioNegocio(new EmpleadoDatos(), new EmpresaDatos(), new CategoriaDatos(), new LiquidacionDatos());
-
-            //Menu
-            bool programa = true;
-            do {
+            
                 bool menu = true;
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine(
-                        "Menu principal: \n " +
-                        "1: Ingresar Empleado \n " +
-                        "2: Consultar Empleado \n " +
-                        "3: Consultar empresa por empleado \n " +
-                        "4: Ingresar empresa por empleado \n " +
-                        "5: Consultar liquidaciones por empleado \n " +
-                        "6: Ingresar liquidaciones por empleado \n " +
-                        "7: Consultar categorias por empleado \n " +
-                        "8: Ingresar categorias por empleado \n " +
-                        "9: Reporte de empleados por empresa \n " +
-                        "10: Reporte de las liquidaciones por categoria \n " +
-                        "0: Salir");
+                    Console.WriteLine(Textos.Menu);
                     int opcion = -1;
-
                     do
                     {
                         if (!int.TryParse(Console.ReadLine(), out opcion))
@@ -319,7 +303,6 @@ namespace EstudioContable
                     }
                 } while (menu);
                 Console.ReadKey();
-            } while (programa);
         }
     }
 }

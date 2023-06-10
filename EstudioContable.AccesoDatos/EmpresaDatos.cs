@@ -12,14 +12,14 @@ namespace EstudioContable.AccesoDatos
         //Empresa
         public List<Empresa> TraerTodosEmpresa()
         {
-            string json2 = WebHelper.Get("EstudioContable.Consola/Empresas");
+            string json2 = WebHelper.Get("EstudioContable/Empresas");
             List<Empresa> resultado = MapList(json2);
             return resultado;
         }
 
         public List<Empresa> Traer(int usuario)
         {
-            string json2 = WebHelper.Get("EstudioContable.Consola/Empresas/" + usuario.ToString()); // trae un texto en formato json de una web
+            string json2 = WebHelper.Get("EstudioContable/Empresas/" + usuario.ToString()); // trae un texto en formato json de una web
             List<Empresa> resultado = MapList(json2);
             return resultado;
         }
@@ -43,7 +43,7 @@ namespace EstudioContable.AccesoDatos
         {
             NameValueCollection obj = ReverseMapEmpresa(empresa); //serializacion -> json
 
-            string json = WebHelper.Post("EstudioContable.Consola/Empresa", obj);
+            string json = WebHelper.Post("EstudioContable/Empresa", obj);
 
             TransactionResult transaction = JsonConvert.DeserializeObject<TransactionResult>(json);
 
@@ -58,7 +58,7 @@ namespace EstudioContable.AccesoDatos
         {
             NameValueCollection obj = ReverseMapEmpresa(empresa);
 
-            string json = WebHelper.Put("EstudioContable.Consola/Empresa", obj);
+            string json = WebHelper.Put("EstudioContable/Empresa", obj);
 
             TransactionResult lst = JsonConvert.DeserializeObject<TransactionResult>(json);
 
