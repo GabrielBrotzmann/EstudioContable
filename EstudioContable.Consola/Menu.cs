@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Text;
 using EstudioContable.Entidades;
 using EstudioContable.Negocio;
 using EstudioContable.Utilidades;
@@ -19,7 +21,7 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id del nuevo empleado:");
             int idEmpleado = Consola.ReadIntFromConsole();
             if (idEmpleado == -1) return;
-            
+
             Console.WriteLine("Ingrese el id de la categoria del nuevo empleado:");
             int idCategoria = Consola.ReadIntFromConsole();
             if (idCategoria == -1) return;
@@ -28,7 +30,7 @@ namespace EstudioContable
                 Console.WriteLine("No se encontro la categoria, vuelva a intentarlo");
                 return;
             }
-            
+
             Console.WriteLine("Ingrese el id de la empresa del nuevo empleado:");
             int idEmpresa = Consola.ReadIntFromConsole();
             if (idEmpresa == -1) return;
@@ -37,23 +39,24 @@ namespace EstudioContable
                 Console.WriteLine("No se encontro la categoria, vuelva a intentarlo");
                 return;
             }
-            
+
             Console.WriteLine("Ingrese el nombre del nuevo empleado:");
             string nombre = Console.ReadLine();
-            
+
             Console.WriteLine("Ingrese el apellido del nuevo empleado:");
             string apellido = Console.ReadLine();
-            
+
             Console.WriteLine("Ingrese el cuit del nuevo empleado sin guiones:");
             long cuitIngresado = Consola.ReadLongFromConsole();
             if (cuitIngresado == -1) return;
-            
+
             Console.WriteLine("Ingrese la fecha de nacimiento del nuevo empleado en formato DD/MM/YYYY:");
             string fnac = Console.ReadLine();
             DateTime fNac = DateTime.Parse(fnac);
 
 
-            _negocio.AltaEmpleado(idEmpleado, idCategoria, idEmpresa, nombre, apellido, cuitIngresado, fNac, DateTime.Today, true);
+            _negocio.AltaEmpleado(idEmpleado, idCategoria, idEmpresa, nombre, apellido, cuitIngresado, fNac,
+                DateTime.Today, true);
 
             Console.WriteLine("El empleado ha sido agregado");
         }
@@ -67,6 +70,7 @@ namespace EstudioContable
             {
                 return;
             }
+
             Empleado emp = _negocio.GetByIdEmpleado(idEmpleado);
             Console.WriteLine(emp.ToString());
         }
@@ -80,17 +84,17 @@ namespace EstudioContable
             {
                 Console.WriteLine("Ya existe un cliente con ese id, pruebe con otro");
             }
-            
+
             Console.WriteLine("Ingrese la razon social del nuevo cliente:");
             string razSoc = Console.ReadLine();
-            
+
             Console.WriteLine("Ingrese el cuil del nuevo cliente sin guiones:");
             long cuil = Consola.ReadLongFromConsole();
-            
+
             if (cuil == -1) return;
             Console.WriteLine("Ingrese el domicilio del cliente");
             string dom = Console.ReadLine();
-            
+
             int idEmpl = 0;
             Console.WriteLine("Ingrese el id del empleado asignado al cliente:");
             int idEmpleado = Consola.ReadIntFromConsole();
@@ -100,7 +104,7 @@ namespace EstudioContable
                 Console.WriteLine("El id ingresado no corresponde a ningun empleado");
                 return;
             }
-            
+
             _negocio.AltaEmpresa(razSoc, cuil, dom, DateTime.Today, idEmpl, idCliente);
             Console.WriteLine("El cliente fue ingresado con exito");
         }
@@ -115,6 +119,7 @@ namespace EstudioContable
                 Console.WriteLine("El id ingresado no corresponde a ninguna empresa");
                 return;
             }
+
             Empresa emp = _negocio.GetByIdEmpresa(idEmpresa);
             Console.WriteLine(emp.ToString());
         }
@@ -166,7 +171,14 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id de la empresa:");
             int idEmpresa = Consola.ReadIntFromConsole();
             if (idEmpresa == -1) return;
-            Console.WriteLine(_negocio.ReporteGetByIdEmpresa(idEmpresa));
+            StringBuilder reporte = new StringBuilder();
+            List<Empleado> empleados = _negocio.GetEmpleadosByEmpresa(idEmpresa);
+            foreach (Empleado empleado in empleados)
+            {
+                reporte.Append(empleado + "\n");
+            }
+
+            Console.WriteLine(reporte);
         }
 
         public void ReporteDeLiquidacionesPorCategoria()
@@ -174,7 +186,14 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id de la categoria:");
             int idCategoria = Consola.ReadIntFromConsole();
             if (idCategoria == -1) return;
-            Console.WriteLine(_negocio.ReporteGetByIdCategoria(idCategoria));
+            StringBuilder reporte = new StringBuilder();
+            List<Liquidacion> liquidacions = _negocio.GetLiquidacionesByCategoria(idCategoria);
+            foreach (Liquidacion liquidacion in liquidacions)
+            {
+                reporte.Append(liquidacion + "\n");
+            }
+
+            Console.WriteLine(reporte);
         }
     }
 }

@@ -14,7 +14,8 @@ namespace EstudioContable.Negocio
         private readonly CategoriaDatos _categoriaDatos;
         private readonly LiquidacionDatos _liquidacionDatos;
 
-        public EstudioNegocio(EmpleadoDatos empleadoDatos, EmpresaDatos empresaDatos, CategoriaDatos categoriaDatos, LiquidacionDatos liquidacionDatos)
+        public EstudioNegocio(EmpleadoDatos empleadoDatos, EmpresaDatos empresaDatos, CategoriaDatos categoriaDatos,
+            LiquidacionDatos liquidacionDatos)
         {
             _empleadoDatos = empleadoDatos;
             _empresaDatos = empresaDatos;
@@ -27,18 +28,21 @@ namespace EstudioContable.Negocio
         {
             return _empleadoDatos.TraerTodos();
         }
+
         public List<Empresa> GetListaEmpresa()
         {
             List<Empresa> list = _empresaDatos.TraerTodosEmpresa();
 
             return list;
         }
+
         public List<Categoria> GetListaCategoria()
         {
             List<Categoria> list = _categoriaDatos.TraerTodos();
 
             return list;
         }
+
         public List<Liquidacion> GetListaLiquidacion()
         {
             List<Liquidacion> list = _liquidacionDatos.TraerTodos();
@@ -63,22 +67,20 @@ namespace EstudioContable.Negocio
 
 
         // Get by Id
-        
+
         public Empleado GetByIdEmpleado(int idEmpleado)
         {
-
             foreach (var item in GetListaEmpleados())
             {
                 if (idEmpleado == item.Id)
                     return item;
-
             }
 
             return null;
         }
+
         public Empleado GetEmpleadoByIdEmpresa(int idEmpresa)
         {
-           
             foreach (var item in GetListaEmpleados())
             {
                 if (idEmpresa == item.Id)
@@ -87,26 +89,24 @@ namespace EstudioContable.Negocio
 
             return null;
         }
+
         public Empresa GetByIdEmpresa(int idEmpresa)
         {
-            
             foreach (var item in GetListaEmpresa())
             {
                 if (idEmpresa == item.Id)
                     return item;
-            
             }
 
             return null;
         }
+
         public Categoria GetByIdCategoria(int idCategoria)
         {
-           
             foreach (var item in GetListaCategoria())
             {
                 if (idCategoria == item.Id)
                     return item;
-                
             }
 
             return null;
@@ -114,17 +114,15 @@ namespace EstudioContable.Negocio
 
         public Liquidacion GetByIdLiquidacion(int idLiquidacion)
         {
-           
             foreach (var item in GetListaLiquidacion())
             {
                 if (idLiquidacion == item.Id)
                     return item;
-                
             }
 
             return null;
         }
-        
+
         public List<Liquidacion> GetLiquidacionByEmpleado(int idEmpleado)
         {
             List<Liquidacion> liquidacionPorEmpleado = new List<Liquidacion>();
@@ -144,25 +142,29 @@ namespace EstudioContable.Negocio
         {
             return _categoriaDatos.TraerPorIdCategoria(categoria.Id);
         }
+
         public Liquidacion TraerLiquidacion(Liquidacion liquidacion)
         {
             return _liquidacionDatos.TraerPorIdLiquidacion(liquidacion.Id);
         }
 
         //Altas
-        public void AltaEmpleado(int id, int idCategoria, int idEmpresa, string nombre, string apellido, long cuil, DateTime fnac, DateTime fechaAlta, bool activo)
+        public void AltaEmpleado(int id, int idCategoria, int idEmpresa, string nombre, string apellido, long cuil,
+            DateTime fnac, DateTime fechaAlta, bool activo)
         {
-            Empleado empleado = new Empleado(id,idEmpresa,nombre,apellido, idCategoria, cuil,fnac,fechaAlta, true);
+            Empleado empleado = new Empleado(id, idEmpresa, nombre, apellido, idCategoria, cuil, fnac, fechaAlta, true);
 
             _empleadoDatos.Insertar(empleado);
         }
-        public void AltaEmpresa(string razonSocial, long cuit, string domicilio, DateTime fechaAlta, int usuario, int id)
+
+        public void AltaEmpresa(string razonSocial, long cuit, string domicilio, DateTime fechaAlta, int usuario,
+            int id)
         {
-            Empresa empresa = new Empresa(razonSocial,cuit,domicilio,fechaAlta,usuario,id);
+            Empresa empresa = new Empresa(razonSocial, cuit, domicilio, fechaAlta, usuario, id);
 
             _empresaDatos.InsertarEmpresa(empresa);
         }
-             
+
 
         public void AltaCategoria(string nombre, string convenio, double sueldoBasico, int id)
         {
@@ -170,35 +172,37 @@ namespace EstudioContable.Negocio
 
             _categoriaDatos.InsertarCategoria(categoria);
         }
-                       
-        public void AltaLiquidacion(int idEmpleado, int periodo, string codigoTransferencia, double bruto, double descuentos, DateTime fechaAlta, int id)
+
+        public void AltaLiquidacion(int idEmpleado, int periodo, string codigoTransferencia, double bruto,
+            double descuentos, DateTime fechaAlta, int id)
         {
-            Liquidacion liquidacion = new Liquidacion(idEmpleado, periodo, codigoTransferencia, bruto, descuentos,fechaAlta, id);
+            Liquidacion liquidacion =
+                new Liquidacion(idEmpleado, periodo, codigoTransferencia, bruto, descuentos, fechaAlta, id);
 
             _liquidacionDatos.InsertarLiquidacion(liquidacion);
         }
 
 
-
         //Reportes
-        public string ReporteGetByIdEmpresa(int idEmpresa)
+        public List<Empleado> GetEmpleadosByEmpresa(int idEmpresa)
         {
-            StringBuilder reporte = new StringBuilder();
+            List<Empleado> empleadosByEmpresa = new List<Empleado>();
             List<Empleado> empleados = GetListaEmpleados();
-            foreach(Empleado e in empleados)
+            foreach (Empleado e in empleados)
             {
-                if(idEmpresa == e.IdEmpresa)
+                if (idEmpresa == e.IdEmpresa)
                 {
-                    reporte.Append(e + "\n");
+                    empleadosByEmpresa.Add(e);
                 }
             }
-            return reporte.ToString();
+
+            return empleadosByEmpresa;
         }
 
-        
-        public string ReporteGetByIdCategoria(int idCategoria)
+
+        public List<Liquidacion> GetLiquidacionesByCategoria(int idCategoria)
         {
-            StringBuilder reporte = new StringBuilder();
+            List<Liquidacion> liquidacionesByCategoria = new List<Liquidacion>();
             List<Liquidacion> liquidaciones = GetListaLiquidacion();
             List<Empleado> empleados = GetEmpleadosByCategoria(idCategoria);
             {
@@ -208,11 +212,12 @@ namespace EstudioContable.Negocio
                     {
                         if (liquidacion.EsDeEmpleado(empleado.Id))
                         {
-                            reporte.Append(liquidacion + "\n");
+                            liquidacionesByCategoria.Add(liquidacion);
                         }
                     }
                 }
-                return reporte.ToString();
+
+                return liquidacionesByCategoria;
             }
         }
 
@@ -234,8 +239,10 @@ namespace EstudioContable.Negocio
                     resultado = false;
                 }
             }
+
             return resultado;
         }
+
         public bool ValidarEmpresaExistente(int id)
         {
             bool resultado = false;
@@ -253,8 +260,10 @@ namespace EstudioContable.Negocio
                     resultado = false;
                 }
             }
+
             return resultado;
         }
+
         public bool ValidarCategoriaExistente(int id)
         {
             bool resultado = false;
@@ -272,8 +281,10 @@ namespace EstudioContable.Negocio
                     resultado = false;
                 }
             }
+
             return resultado;
         }
+
         public bool ValidarLiquidacionExistente(int id)
         {
             bool resultado = false;
@@ -291,9 +302,8 @@ namespace EstudioContable.Negocio
                     resultado = false;
                 }
             }
+
             return resultado;
         }
-        
-
     }
 }
