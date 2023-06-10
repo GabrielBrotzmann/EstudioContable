@@ -13,7 +13,7 @@ namespace EstudioContable
             EstudioNegocio negocio = new EstudioNegocio(new EmpleadoDatos(), new EmpresaDatos(), new CategoriaDatos(),
                 new LiquidacionDatos());
             Menu menu = new Menu(negocio);
-            Dictionary<string, Action> operaciones = new Dictionary<string, Action>
+            Dictionary<string, Action> opciones = new Dictionary<string, Action>
             {
                 { "1", menu.IngresarEmpleado },
                 { "2", menu.ConsultarEmpleado },
@@ -31,12 +31,12 @@ namespace EstudioContable
                 Console.WriteLine(Textos.Menu);
                 string opcion = Console.ReadLine();
                 if (opcion == "0") return;
-                if (string.IsNullOrEmpty(opcion) || !operaciones.ContainsKey(opcion))
+                if (string.IsNullOrEmpty(opcion) || !opciones.ContainsKey(opcion))
                 {
                     Console.WriteLine("Opcion invalida, intente nuevamente");
                     continue;
                 }
-                operaciones[opcion]();
+                opciones[opcion]();
             } while (true);
         }
     }
