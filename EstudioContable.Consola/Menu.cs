@@ -74,6 +74,7 @@ namespace EstudioContable
             if (idEmpleado == -1) return;
             if (!_empleadoNegocio.ValidarEmpleadoExistente(idEmpleado))
             {
+                Console.WriteLine("No existe empleado con id: " + idEmpleado);
                 return;
             }
 

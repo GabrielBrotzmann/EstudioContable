@@ -10,8 +10,6 @@ namespace EstudioContable.AccesoDatos
 {
     public class EmpleadoDatos
     {
-
-
         public List<Empleado> TraerTodos()
         {
             string json2 = WebHelper.Get("EstudioContable/Empleados");
@@ -21,12 +19,12 @@ namespace EstudioContable.AccesoDatos
 
         public List<Empleado> Traer(int usuario)
         {
-            string json2 = WebHelper.Get("EstudioContable/Empleados" + usuario.ToString()); // trae un texto en formato json de una web
+            string json2 =
+                WebHelper.Get("EstudioContable/Empleados" +
+                              usuario.ToString()); // trae un texto en formato json de una web
             List<Empleado> resultado = MapList(json2);
             return resultado;
         }
-
-      
 
         private List<Empleado> MapList(string json)
         {
@@ -34,7 +32,6 @@ namespace EstudioContable.AccesoDatos
             return lst;
         }
 
-        
 
         private Empleado MapObj(string json)
         {
@@ -52,10 +49,9 @@ namespace EstudioContable.AccesoDatos
 
             if (!transaction.IsOk)
             {
-                throw new Exception(transaction.Error);   
+                throw new Exception(transaction.Error);
             }
         }
-
 
         public TransactionResult Actualizar(Empleado empleado)
         {
@@ -80,11 +76,9 @@ namespace EstudioContable.AccesoDatos
             n.Add("fechaNacimiento", empleado.FechaNacimiento.ToString());
             n.Add("fechaAlta", empleado.FechaAlta.ToString());
             n.Add("id", empleado.Id.ToString());
-            
+
             Console.WriteLine(n);
             return n;
         }
-
-        
     }
 }
