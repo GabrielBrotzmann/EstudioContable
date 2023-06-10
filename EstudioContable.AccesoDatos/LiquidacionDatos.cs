@@ -1,9 +1,9 @@
-﻿using EstudioContable.Entidades;
+﻿using System;
+using EstudioContable.Entidades;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using EstudioContable.AccesoDatos.Utilidades;
-using EstudioContable.Utilidades;
 
 namespace EstudioContable.AccesoDatos
 {
@@ -35,25 +35,26 @@ namespace EstudioContable.AccesoDatos
             return lst;
         }
 
-        public Response InsertarLiquidacion(Liquidacion liquidacion)
+        public void InsertarLiquidacion(Liquidacion liquidacion)
         {
             NameValueCollection obj = ReverseMapLiquidacion(liquidacion); //serializacion -> json
 
             string json = WebHelper.Post("EstudioContable/Liquidacion", obj);
 
-            Response lst = JsonConvert.DeserializeObject<Response>(json);
+            TransactionResult transaction = JsonConvert.DeserializeObject<TransactionResult>(json);
 
-            return lst;
+            if (!transaction.IsOk)
+                throw new Exception(transaction.Error);
         }
 
 
-        public Response Actualizar(Liquidacion liquidacion)
+        public TransactionResult Actualizar(Liquidacion liquidacion)
         {
             NameValueCollection obj = ReverseMapLiquidacion(liquidacion);
 
             string json = WebHelper.Put("EstudioContable/Liquidacion", obj);
 
-            Response lst = JsonConvert.DeserializeObject<Response>(json);
+            TransactionResult lst = JsonConvert.DeserializeObject<TransactionResult>(json);
 
             return lst;
         }

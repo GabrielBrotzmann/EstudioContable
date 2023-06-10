@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using EstudioContable.AccesoDatos.Utilidades;
-using EstudioContable.Utilidades;
 
 
 namespace EstudioContable.AccesoDatos
@@ -43,25 +42,28 @@ namespace EstudioContable.AccesoDatos
             return lst;
         }
 
-        public Response Insertar(Empleado empleado)
+        public void Insertar(Empleado empleado)
         {
             NameValueCollection obj = ReverseMap(empleado); //serializacion -> json
 
             string json = WebHelper.Post("EstudioContable/Empleado", obj);
 
-            Response lst = JsonConvert.DeserializeObject<Response>(json);
+            TransactionResult transaction = JsonConvert.DeserializeObject<TransactionResult>(json);
 
-            return lst;
+            if (!transaction.IsOk)
+            {
+                throw new Exception(transaction.Error);   
+            }
         }
 
 
-        public Response Actualizar(Empleado empleado)
+        public TransactionResult Actualizar(Empleado empleado)
         {
             NameValueCollection obj = ReverseMap(empleado);
 
             string json = WebHelper.Put("EstudioContable/Empleado", obj);
 
-            Response lst = JsonConvert.DeserializeObject<Response>(json);
+            TransactionResult lst = JsonConvert.DeserializeObject<TransactionResult>(json);
 
             return lst;
         }
