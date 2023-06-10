@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using EstudioContable.AccesoDatos;
 using EstudioContable.Negocio;
-using EstudioContable.Utilidades;
 
 namespace EstudioContable
 {
@@ -10,9 +9,8 @@ namespace EstudioContable
     {
         static void Main(string[] args)
         {
-            EstudioNegocio negocio = new EstudioNegocio(new EmpleadoDatos(), new EmpresaDatos(), new CategoriaDatos(),
-                new LiquidacionDatos());
-            Menu menu = new Menu(negocio);
+            Menu menu = new Menu(new EmpleadoNegocio(new EmpleadoDatos()), new EmpresaNegocio(new EmpresaDatos()),
+                new LiquidacionNegocio(new LiquidacionDatos()), new CategoriaNegocio(new CategoriaDatos()));
             Dictionary<string, Action> opciones = new Dictionary<string, Action>
             {
                 { "1", menu.IngresarEmpleado },
@@ -36,6 +34,7 @@ namespace EstudioContable
                     Console.WriteLine("Opcion invalida, intente nuevamente");
                     continue;
                 }
+
                 opciones[opcion]();
             } while (true);
         }

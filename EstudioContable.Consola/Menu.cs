@@ -9,11 +9,17 @@ namespace EstudioContable
 {
     public class Menu
     {
-        private EstudioNegocio _negocio;
+        private readonly EmpleadoNegocio _empleadoNegocio;
+        private readonly EmpresaNegocio _empresaNegocio;
+        private readonly LiquidacionNegocio _liquidacionNegocio;
+        private readonly CategoriaNegocio _categoriaNegocio;
 
-        public Menu(EstudioNegocio negocio)
+        public Menu(EmpleadoNegocio empleadoNegocio, EmpresaNegocio empresaNegocio, LiquidacionNegocio liquidacionNegocio, CategoriaNegocio categoriaNegocio)
         {
-            _negocio = negocio;
+            _empleadoNegocio = empleadoNegocio;
+            _empresaNegocio = empresaNegocio;
+            _liquidacionNegocio = liquidacionNegocio;
+            _categoriaNegocio = categoriaNegocio;
         }
 
         public void IngresarEmpleado()
@@ -25,7 +31,7 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id de la categoria del nuevo empleado:");
             int idCategoria = Consola.ReadIntFromConsole();
             if (idCategoria == -1) return;
-            if (!_negocio.ValidarCategoriaExistente(idCategoria))
+            if (!_categoriaNegocio.ValidarCategoriaExistente(idCategoria))
             {
                 Console.WriteLine("No se encontro la categoria, vuelva a intentarlo");
                 return;
@@ -34,7 +40,7 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id de la empresa del nuevo empleado:");
             int idEmpresa = Consola.ReadIntFromConsole();
             if (idEmpresa == -1) return;
-            if (!_negocio.ValidarEmpresaExistente(idEmpresa))
+            if (!_empresaNegocio.ValidarEmpresaExistente(idEmpresa))
             {
                 Console.WriteLine("No se encontro la categoria, vuelva a intentarlo");
                 return;
@@ -55,7 +61,7 @@ namespace EstudioContable
             DateTime fNac = DateTime.Parse(fnac);
 
 
-            _negocio.AltaEmpleado(idEmpleado, idCategoria, idEmpresa, nombre, apellido, cuitIngresado, fNac,
+            _empleadoNegocio.AltaEmpleado(idEmpleado, idCategoria, idEmpresa, nombre, apellido, cuitIngresado, fNac,
                 DateTime.Today, true);
 
             Console.WriteLine("El empleado ha sido agregado");
@@ -66,12 +72,12 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id del empleado:");
             int idEmpleado = Consola.ReadIntFromConsole();
             if (idEmpleado == -1) return;
-            if (!_negocio.ValidarEmpleadoExistente(idEmpleado))
+            if (!_empleadoNegocio.ValidarEmpleadoExistente(idEmpleado))
             {
                 return;
             }
 
-            Empleado emp = _negocio.GetByIdEmpleado(idEmpleado);
+            Empleado emp = _empleadoNegocio.GetByIdEmpleado(idEmpleado);
             Console.WriteLine(emp.ToString());
         }
 
@@ -80,7 +86,7 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id del nuevo cliente:");
             int idCliente = Consola.ReadIntFromConsole();
             if (idCliente == -1) return;
-            if (_negocio.ValidarEmpresaExistente(idCliente))
+            if (_empresaNegocio.ValidarEmpresaExistente(idCliente))
             {
                 Console.WriteLine("Ya existe un cliente con ese id, pruebe con otro");
             }
@@ -99,13 +105,13 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id del empleado asignado al cliente:");
             int idEmpleado = Consola.ReadIntFromConsole();
             if (idEmpleado == -1) return;
-            if (!_negocio.ValidarEmpleadoExistente(idEmpleado))
+            if (!_empleadoNegocio.ValidarEmpleadoExistente(idEmpleado))
             {
                 Console.WriteLine("El id ingresado no corresponde a ningun empleado");
                 return;
             }
 
-            _negocio.AltaEmpresa(razSoc, cuil, dom, DateTime.Today, idEmpl, idCliente);
+            _empresaNegocio.AltaEmpresa(razSoc, cuil, dom, DateTime.Today, idEmpl, idCliente);
             Console.WriteLine("El cliente fue ingresado con exito");
         }
 
@@ -114,13 +120,13 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id de la empresa:");
             int idEmpresa = Consola.ReadIntFromConsole();
             if (idEmpresa == -1) return;
-            if (!_negocio.ValidarEmpresaExistente(idEmpresa))
+            if (!_empresaNegocio.ValidarEmpresaExistente(idEmpresa))
             {
                 Console.WriteLine("El id ingresado no corresponde a ninguna empresa");
                 return;
             }
 
-            Empresa emp = _negocio.GetByIdEmpresa(idEmpresa);
+            Empresa emp = _empresaNegocio.GetByIdEmpresa(idEmpresa);
             Console.WriteLine(emp.ToString());
         }
 
@@ -129,7 +135,7 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id del empleado:");
             int idEmpleado = Consola.ReadIntFromConsole();
             if (idEmpleado == -1) return;
-            Console.WriteLine(_negocio.GetLiquidacionByEmpleado(idEmpleado));
+            Console.WriteLine(_liquidacionNegocio.GetLiquidacionByEmpleado(idEmpleado));
         }
 
         public void IngresarLiquidacionesPorEmpleado()
@@ -151,7 +157,7 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id:");
             int id = Convert.ToInt32(Console.ReadLine());
 
-            _negocio.AltaLiquidacion(idEmpleado, periodo, codtransferencia, bruto, descuento, fechaalta, id);
+            _liquidacionNegocio.AltaLiquidacion(idEmpleado, periodo, codtransferencia, bruto, descuento, fechaalta, id);
         }
 
         public void ConsultarCategoriasPorEmpleado()
@@ -172,7 +178,7 @@ namespace EstudioContable
             int idEmpresa = Consola.ReadIntFromConsole();
             if (idEmpresa == -1) return;
             StringBuilder reporte = new StringBuilder();
-            List<Empleado> empleados = _negocio.GetEmpleadosByEmpresa(idEmpresa);
+            List<Empleado> empleados = _empleadoNegocio.GetEmpleadosByEmpresa(idEmpresa);
             foreach (Empleado empleado in empleados)
             {
                 reporte.Append(empleado + "\n");
@@ -187,7 +193,8 @@ namespace EstudioContable
             int idCategoria = Consola.ReadIntFromConsole();
             if (idCategoria == -1) return;
             StringBuilder reporte = new StringBuilder();
-            List<Liquidacion> liquidacions = _negocio.GetLiquidacionesByCategoria(idCategoria);
+            List<Empleado> empleados = _empleadoNegocio.GetEmpleadosByCategoria(idCategoria);
+            List<Liquidacion> liquidacions = _liquidacionNegocio.GetLiquidacionesByEmpleados(empleados);
             foreach (Liquidacion liquidacion in liquidacions)
             {
                 reporte.Append(liquidacion + "\n");

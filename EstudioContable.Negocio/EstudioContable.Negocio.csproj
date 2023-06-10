@@ -38,7 +38,10 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="EstudioNegocio.cs" />
+        <Compile Include="CategoriaNegocio.cs" />
+        <Compile Include="EmpleadoNegocio.cs" />
+        <Compile Include="EmpresaNegocio.cs" />
+        <Compile Include="LiquidacionNegocio.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
