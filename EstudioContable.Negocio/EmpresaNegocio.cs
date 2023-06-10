@@ -5,7 +5,8 @@ using EstudioContable.Entidades;
 
 namespace EstudioContable.Negocio
 {
-    public class EmpresaNegocio
+    public interface IEmpresaNegocio {}
+    public class EmpresaNegocio : IEmpresaNegocio
     {
         private readonly EmpresaDatos _empresaDatos;
 

@@ -5,7 +5,11 @@ using EstudioContable.Entidades;
 
 namespace EstudioContable.Negocio
 {
-    public class EmpleadoNegocio
+    public interface IEmpleadoNegocio
+    {
+        Empleado GetByIdEmpleado(int idEmpleado);
+    }
+    public class EmpleadoNegocio : IEmpleadoNegocio
     {
         private readonly EmpleadoDatos _empleadoDatos;
 
