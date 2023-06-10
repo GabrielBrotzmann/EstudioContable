@@ -11,14 +11,14 @@ namespace EstudioContable.AccesoDatos
     {
         public List<Categoria> TraerTodos()
         {
-            string json2 = WebHelper.Get("EstudioContable/Categorias");
+            string json2 = WebHelper.Get("EstudioContable.Consola/Categorias");
             List<Categoria> resultado = MapList(json2);
             return resultado;
         }
 
         public Categoria TraerPorIdCategoria(int id)
         {
-            string json2 = WebHelper.Get("EstudioContable/Categoria/" + id.ToString());
+            string json2 = WebHelper.Get("EstudioContable.Consola/Categoria/" + id.ToString());
             Categoria resultado = MapObj(json2);
             return resultado;
         }
@@ -41,7 +41,7 @@ namespace EstudioContable.AccesoDatos
         {
             NameValueCollection obj = ReverseMapCategoria(Categoria); //serializacion -> json
 
-            string json = WebHelper.Post("EstudioContable/Categoria", obj);
+            string json = WebHelper.Post("EstudioContable.Consola/Categoria", obj);
 
             TransactionResult transaction = JsonConvert.DeserializeObject<TransactionResult>(json);
 
@@ -54,7 +54,7 @@ namespace EstudioContable.AccesoDatos
         {
             NameValueCollection obj = ReverseMapCategoria(Categoria);
 
-            string json = WebHelper.Put("EstudioContable/Categoria", obj);
+            string json = WebHelper.Put("EstudioContable.Consola/Categoria", obj);
 
             TransactionResult lst = JsonConvert.DeserializeObject<TransactionResult>(json);
 

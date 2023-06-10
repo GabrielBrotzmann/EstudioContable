@@ -7,7 +7,7 @@
     <ProjectGuid>{D9B91994-19DD-4AB6-A23C-AF45258EEEA1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>EstudioContable</RootNamespace>
-    <AssemblyName>EstudioContable</AssemblyName>
+    <AssemblyName>EstudioContable.Consola</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -66,9 +66,6 @@
       <Project>{74ca674b-d30f-4cfd-9fb0-3a91c43e4959}</Project>
       <Name>EstudioContable.Negocio</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Negocio\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

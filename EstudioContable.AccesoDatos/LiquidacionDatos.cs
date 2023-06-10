@@ -11,14 +11,14 @@ namespace EstudioContable.AccesoDatos
     {
         public List<Liquidacion> TraerTodos()
         {
-            string json2 = WebHelper.Get("EstudioContable/Liquidaciones/");
+            string json2 = WebHelper.Get("EstudioContable.Consola/Liquidaciones/");
             List<Liquidacion> resultado = MapList(json2);
             return resultado;
         }
 
         public Liquidacion TraerPorIdLiquidacion(int id)
         {
-            string json2 = WebHelper.Get("EstudioContable/Liquidacion/" + id.ToString());
+            string json2 = WebHelper.Get("EstudioContable.Consola/Liquidacion/" + id.ToString());
             Liquidacion resultado = MapObj(json2);
             return resultado;
         }
@@ -39,7 +39,7 @@ namespace EstudioContable.AccesoDatos
         {
             NameValueCollection obj = ReverseMapLiquidacion(liquidacion); //serializacion -> json
 
-            string json = WebHelper.Post("EstudioContable/Liquidacion", obj);
+            string json = WebHelper.Post("EstudioContable.Consola/Liquidacion", obj);
 
             TransactionResult transaction = JsonConvert.DeserializeObject<TransactionResult>(json);
 
@@ -52,7 +52,7 @@ namespace EstudioContable.AccesoDatos
         {
             NameValueCollection obj = ReverseMapLiquidacion(liquidacion);
 
-            string json = WebHelper.Put("EstudioContable/Liquidacion", obj);
+            string json = WebHelper.Put("EstudioContable.Consola/Liquidacion", obj);
 
             TransactionResult lst = JsonConvert.DeserializeObject<TransactionResult>(json);
 
