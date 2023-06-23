@@ -41,6 +41,7 @@ namespace EstudioContable
             if (!_categoriaNegocio.ValidarCategoriaExistente(idCategoria))
             {
                 Console.WriteLine("No se encontro la categoria, vuelva a intentarlo");
+                Console.ReadLine();
                 return;
             }
 
@@ -50,6 +51,7 @@ namespace EstudioContable
             if (!_empresaNegocio.ValidarEmpresaExistente(idEmpresa))
             {
                 Console.WriteLine("No se encontro la categoria, vuelva a intentarlo");
+                Console.ReadLine();
                 return;
             }
 
@@ -92,6 +94,7 @@ namespace EstudioContable
             if (!_empleadoNegocio.ValidarEmpleadoExistente(idEmpleado))
             {
                 Console.WriteLine("No existe empleado con id: " + idEmpleado);
+                Console.ReadLine();
                 return;
             }
 
@@ -110,6 +113,7 @@ namespace EstudioContable
             if (!_empresaNegocio.ValidarEmpresaExistente(idEmpresa))
             {
                 Console.WriteLine("El id ingresado no corresponde a ninguna empresa");
+                Console.ReadLine();
                 return;
             }
 
@@ -150,6 +154,7 @@ namespace EstudioContable
             if (!_empleadoNegocio.ValidarEmpleadoExistente(idEmpleado))
             {
                 Console.WriteLine("El id ingresado no corresponde a ningun empleado");
+                Console.ReadLine();
                 return;
             }
 
@@ -168,6 +173,7 @@ namespace EstudioContable
             if (!_empleadoNegocio.ValidarEmpleadoExistente(idEmpleado))
             {
                 Console.WriteLine("No se encontro empleado para ese id");
+                Console.ReadLine();
                 return;
             }
             List<Liquidacion> liquidaciones =  _liquidacionNegocio.GetLiquidacionByEmpleado(idEmpleado);
@@ -233,6 +239,7 @@ namespace EstudioContable
             if (empleado == null)
             {
                 Console.WriteLine("No se encontro empleado para ese id");
+                Console.ReadLine();
                 return;
             }
             Categoria categoria = _categoriaNegocio.GetByIdCategoria(empleado.IdCategoria);
@@ -277,6 +284,7 @@ namespace EstudioContable
             if (!_empresaNegocio.ValidarEmpresaExistente(idEmpresa))
             {
                 Console.WriteLine("No existe una empresa con ese id, pruebe con otro");
+                Console.ReadLine();
                 return;
             }
             StringBuilder reporte = new StringBuilder();
@@ -298,6 +306,7 @@ namespace EstudioContable
             if (!_empresaNegocio.ValidarEmpresaExistente(idCategoria))
             {
                 Console.WriteLine("No existe una categoria con ese id, pruebe con otro");
+                Console.ReadLine();
                 return;
             }
             StringBuilder reporte = new StringBuilder();
