@@ -1,0 +1,47 @@
+---
+title: Estudio contable
+---
+classDiagram
+    class Persona {
+        <<Abstract>>
+        # String Nombre
+        # String Apellido
+        # Date FechaNacimiento
+    }
+    class Empleado {
+        -Int32 Id
+        -Int64 Cuil
+        -Date FechaAlta
+        +AgregarLiquidacion(liquidacion Liquidacion)
+        +ObtenerLiquidaciones()  List~Liquidacion~
+        +ObtenerCategoria() Categoria
+    }
+    class Empresa {
+        -Int32 Id
+        -String RazonSocial
+        -Int64 Cuit
+        -String Domicilio
+        -Date FechaAlta
+        -Int32 Usuario
+        +AgregarEmpleado(empleado Empleado)
+    }
+    class Categoria {
+        -Int32 Id
+        -String Nombre
+        -String Convenio
+        -Double SueldoBasico
+    }
+    class Liquidacion {
+        -Int32 Id
+        -Int32 Periodo
+        -String CodigoTransferencia
+        -Double Bruto
+        -Double Descuento
+        -Date FechaAlta
+    }
+    Empresa "1" *-- "1...*" Empleado
+    Empleado "1" o-- "0...*" Liquidacion
+    Empleado "1" *-- "1" Categoria
+    Categoria -- Liquidacion
+    Persona <|-- Empleado
+    
