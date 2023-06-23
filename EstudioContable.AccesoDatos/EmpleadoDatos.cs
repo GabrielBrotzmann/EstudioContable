@@ -67,17 +67,14 @@ namespace EstudioContable.AccesoDatos
         private NameValueCollection ReverseMap(Empleado empleado)
         {
             NameValueCollection n = new NameValueCollection();
-
             n.Add("idCategoria", empleado.IdCategoria.ToString());
             n.Add("idEmpresa", empleado.IdEmpresa.ToString());
             n.Add("cuil", empleado.Cuil.ToString());
             n.Add("nombre", empleado.Nombre);
             n.Add("apellido", empleado.Apellido);
-            n.Add("fechaNacimiento", empleado.FechaNacimiento.ToString());
-            n.Add("fechaAlta", empleado.FechaAlta.ToString());
+            n.Add("fechaNacimiento", empleado.FechaNacimiento.ToString("dd/MM/yyyy"));
+            n.Add("fechaAlta", empleado.FechaAlta.ToString("dd/MM/yyyy"));
             n.Add("id", empleado.Id.ToString());
-
-            Console.WriteLine(n);
             return n;
         }
     }

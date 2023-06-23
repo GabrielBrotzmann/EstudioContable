@@ -27,7 +27,12 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id del nuevo empleado:");
             int idEmpleado = Consola.ReadIntFromConsole();
             if (idEmpleado == -1) return;
-
+            if (_empleadoNegocio.ValidarEmpleadoExistente(idEmpleado))
+            {
+                Console.WriteLine("Ya existe un empleado con ese id, intente nuevamente");
+                Console.ReadKey();
+                return;
+            }
             Console.WriteLine("Ingrese el id de la categoria del nuevo empleado:");
             int idCategoria = Consola.ReadIntFromConsole();
             if (idCategoria == -1) return;
@@ -61,8 +66,17 @@ namespace EstudioContable
             DateTime fNac = DateTime.Parse(fnac);
 
 
-            _empleadoNegocio.AltaEmpleado(idEmpleado, idCategoria, idEmpresa, nombre, apellido, cuitIngresado, fNac,
-                DateTime.Today, true);
+            try
+            {
+                _empleadoNegocio.AltaEmpleado(idEmpleado, idCategoria, idEmpresa, nombre, apellido, cuitIngresado, fNac,
+                    DateTime.Today, true);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error al ingresar nuevo empleado, intentelo nuevamente");
+                Console.ReadKey();
+                return;
+            }
 
             Console.WriteLine("El empleado ha sido agregado");
             Console.WriteLine("\n" + "Presione cualquier tecla para continuar");
