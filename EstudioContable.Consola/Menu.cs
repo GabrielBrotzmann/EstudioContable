@@ -122,13 +122,16 @@ namespace EstudioContable
 
         public void IngresarEmpresaPorEmpleado()
         {
-            Console.WriteLine("Ingrese el id del nuevo cliente:");
-            int idCliente = Consola.ReadIntFromConsole();
-            if (idCliente == -1) return;
-            if (_empresaNegocio.ValidarEmpresaExistente(idCliente))
+            List<Empresa> listadoEmpresas = _empresaNegocio.GetListaEmpresa();
+            int id = 0;
+            foreach (Empresa empresa in listadoEmpresas)
             {
-                Console.WriteLine("Ya existe un cliente con ese id, pruebe con otro");
+                if (empresa.Id > id)
+                {
+                    id = empresa.Id;
+                }
             }
+            int idCliente = id + 1;
 
             Console.WriteLine("Ingrese la razon social del nuevo cliente:");
             string razSoc = Console.ReadLine();
@@ -227,9 +230,13 @@ namespace EstudioContable
             int idEmpleado = Consola.ReadIntFromConsole();
             if (idEmpleado == -1) return;
             Empleado empleado = _empleadoNegocio.GetByIdEmpleado(idEmpleado);
+            if (empleado == null)
+            {
+                Console.WriteLine("No se encontro empleado para ese id");
+                return;
+            }
             Categoria categoria = _categoriaNegocio.GetByIdCategoria(empleado.IdCategoria);
             Console.WriteLine(categoria.ToString());
-
             Console.WriteLine("\n" + "Presione cualquier tecla para continuar");
             Console.ReadLine();
             Console.Clear();
@@ -267,13 +274,17 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id de la empresa:");
             int idEmpresa = Consola.ReadIntFromConsole();
             if (idEmpresa == -1) return;
+            if (!_empresaNegocio.ValidarEmpresaExistente(idEmpresa))
+            {
+                Console.WriteLine("No existe una empresa con ese id, pruebe con otro");
+                return;
+            }
             StringBuilder reporte = new StringBuilder();
             List<Empleado> empleados = _empleadoNegocio.GetEmpleadosByEmpresa(idEmpresa);
             foreach (Empleado empleado in empleados)
             {
                 reporte.Append(empleado + "\n");
             }
-
             Console.WriteLine(reporte);
             Console.WriteLine("\n" + "Presione cualquier tecla para continuar");
             Console.ReadLine();
@@ -284,6 +295,11 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id de la categoria:");
             int idCategoria = Consola.ReadIntFromConsole();
             if (idCategoria == -1) return;
+            if (!_empresaNegocio.ValidarEmpresaExistente(idCategoria))
+            {
+                Console.WriteLine("No existe una categoria con ese id, pruebe con otro");
+                return;
+            }
             StringBuilder reporte = new StringBuilder();
             List<Empleado> empleados = _empleadoNegocio.GetEmpleadosByCategoria(idCategoria);
             List<Liquidacion> liquidacions = _liquidacionNegocio.GetLiquidacionesByEmpleados(empleados);
