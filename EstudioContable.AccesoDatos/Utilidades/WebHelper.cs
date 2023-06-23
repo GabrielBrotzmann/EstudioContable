@@ -45,9 +45,8 @@ namespace EstudioContable.AccesoDatos.Utilidades
 
                 return responseString;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex);
                 return "{ \"isOk\":false,\"id\":-1,\"error\":\"Error en el llamado al servicio\"}";
             }
         }
@@ -64,9 +63,8 @@ namespace EstudioContable.AccesoDatos.Utilidades
 
                 return responseString;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex);
                 return "{ \"isOk\":false,\"id\":-1,\"error\":\"Error en el llamado al servicio\"}";
             }
         }
@@ -83,9 +81,8 @@ namespace EstudioContable.AccesoDatos.Utilidades
 
                 return responseString;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex);
                 return "{ \"isOk\":false,\"id\":-1,\"error\":\"Error en el llamado al servicio\"}";
             }
         }

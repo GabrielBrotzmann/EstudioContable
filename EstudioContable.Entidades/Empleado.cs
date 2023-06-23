@@ -8,11 +8,11 @@ namespace EstudioContable.Entidades
         private int _idEmpresa;
         private int _idCategoria;
         private long _cuil;
-        private DateTime _fechaNacimiento;
+        private string _fechaNacimiento;
         private DateTime _fechaAlta;
         private bool _activo;
 
-        public Empleado(int id, int idEmpresa,string nombre,string apellido, int idCategoria, long cuil, DateTime fechaNacimiento, DateTime fechaAlta, bool activo) :  base (id,  nombre,  apellido )
+        public Empleado(int id, int idEmpresa,string nombre,string apellido, int idCategoria, long cuil, string fechaNacimiento, DateTime fechaAlta, bool activo) :  base (id,  nombre,  apellido )
         {
             _idEmpresa = idEmpresa;
             _idCategoria = idCategoria;
@@ -25,7 +25,7 @@ namespace EstudioContable.Entidades
         public int IdEmpresa { get { return _idEmpresa; } set { _idEmpresa = value; } }
         public int IdCategoria { get { return _idCategoria; } set { _idCategoria = value; } }
         public long Cuil { get { return _cuil; } set { _cuil = value; } }
-        public DateTime FechaNacimiento { get { return _fechaNacimiento; } set { _fechaNacimiento = value; } }
+        public string FechaNacimiento { get { return _fechaNacimiento; } set { _fechaNacimiento = value; } }
         public DateTime FechaAlta { get { return _fechaAlta; } set { _fechaAlta = value; } }
         public bool Activo { get { return _activo; } set { _activo = value; } }
         

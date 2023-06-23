@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using EstudioContable.AccesoDatos.Utilidades;
 
-
 namespace EstudioContable.AccesoDatos
 {
     public class EmpleadoDatos
@@ -20,8 +19,7 @@ namespace EstudioContable.AccesoDatos
         public List<Empleado> Traer(int usuario)
         {
             string json2 =
-                WebHelper.Get("EstudioContable/Empleados" +
-                              usuario.ToString()); // trae un texto en formato json de una web
+                WebHelper.Get("EstudioContable/Empleados" + usuario); // trae un texto en formato json de una web
             List<Empleado> resultado = MapList(json2);
             return resultado;
         }
@@ -72,7 +70,7 @@ namespace EstudioContable.AccesoDatos
             n.Add("cuil", empleado.Cuil.ToString());
             n.Add("nombre", empleado.Nombre);
             n.Add("apellido", empleado.Apellido);
-            n.Add("fechaNacimiento", empleado.FechaNacimiento.ToString("dd/MM/yyyy"));
+            n.Add("fechaNacimiento", empleado.FechaNacimiento);
             n.Add("fechaAlta", empleado.FechaAlta.ToString("dd/MM/yyyy"));
             n.Add("id", empleado.Id.ToString());
             return n;

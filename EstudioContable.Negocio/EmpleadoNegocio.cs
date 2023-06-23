@@ -61,7 +61,7 @@ namespace EstudioContable.Negocio
         }
 
         public void AltaEmpleado(int id, int idCategoria, int idEmpresa, string nombre, string apellido, long cuil,
-            DateTime fnac, DateTime fechaAlta, bool activo)
+            string fnac, DateTime fechaAlta, bool activo)
         {
             Empleado empleado = new Empleado(id, idEmpresa, nombre, apellido, idCategoria, cuil, fnac, fechaAlta, true);
 
@@ -85,23 +85,15 @@ namespace EstudioContable.Negocio
 
         public bool ValidarEmpleadoExistente(int id)
         {
-            bool resultado = false;
             List<Empleado> listadoEmpleados = GetListaEmpleados();
-
             foreach (Empleado emp in listadoEmpleados)
             {
                 if (emp.Id == id)
                 {
-                    resultado = true;
-                    break;
-                }
-                else
-                {
-                    resultado = false;
+                    return true;
                 }
             }
-
-            return resultado;
+            return false;
         }
     }
 }

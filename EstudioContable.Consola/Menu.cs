@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using EstudioContable.Entidades;
 using EstudioContable.Negocio;
@@ -24,15 +25,16 @@ namespace EstudioContable
 
         public void IngresarEmpleado()
         {
-            Console.WriteLine("Ingrese el id del nuevo empleado:");
-            int idEmpleado = Consola.ReadIntFromConsole();
-            if (idEmpleado == -1) return;
-            if (_empleadoNegocio.ValidarEmpleadoExistente(idEmpleado))
+            List<Empleado> listadoEmpleados = _empleadoNegocio.GetListaEmpleados();
+            int id = 0;
+            foreach (Empleado empleado in listadoEmpleados)
             {
-                Console.WriteLine("Ya existe un empleado con ese id, intente nuevamente");
-                Console.ReadKey();
-                return;
+                if (empleado.Id > id)
+                {
+                    id = empleado.Id;
+                }
             }
+            int idEmpleado = id + 1;
             Console.WriteLine("Ingrese el id de la categoria del nuevo empleado:");
             int idCategoria = Consola.ReadIntFromConsole();
             if (idCategoria == -1) return;
@@ -63,12 +65,10 @@ namespace EstudioContable
 
             Console.WriteLine("Ingrese la fecha de nacimiento del nuevo empleado en formato DD/MM/YYYY:");
             string fnac = Console.ReadLine();
-            DateTime fNac = DateTime.Parse(fnac);
-
 
             try
             {
-                _empleadoNegocio.AltaEmpleado(idEmpleado, idCategoria, idEmpresa, nombre, apellido, cuitIngresado, fNac,
+                _empleadoNegocio.AltaEmpleado(idEmpleado, idCategoria, idEmpresa, nombre, apellido, cuitIngresado, fnac,
                     DateTime.Today, true);
             }
             catch (Exception)
@@ -78,7 +78,7 @@ namespace EstudioContable
                 return;
             }
 
-            Console.WriteLine("El empleado ha sido agregado");
+            Console.WriteLine("El empleado ha sido agregado con id " + idEmpleado);
             Console.WriteLine("\n" + "Presione cualquier tecla para continuar");
             Console.ReadLine();
             Console.Clear();
@@ -162,7 +162,20 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id del empleado:");
             int idEmpleado = Consola.ReadIntFromConsole();
             if (idEmpleado == -1) return;
-            Console.WriteLine(_liquidacionNegocio.GetLiquidacionByEmpleado(idEmpleado));
+            if (!_empleadoNegocio.ValidarEmpleadoExistente(idEmpleado))
+            {
+                Console.WriteLine("No se encontro empleado para ese id");
+                return;
+            }
+            List<Liquidacion> liquidaciones =  _liquidacionNegocio.GetLiquidacionByEmpleado(idEmpleado);
+            if (liquidaciones.Any())
+            {
+                Console.WriteLine(liquidaciones);
+            }
+            else
+            {
+                Console.WriteLine("No se encontraron liquidaciones para este empleado");
+            }
             Console.WriteLine("\n" + "Presione cualquier tecla para continuar");
             Console.ReadLine();
             Console.Clear();
@@ -200,7 +213,7 @@ namespace EstudioContable
                     id = liquidacion.Id;
                 }
             }
-            id = id + 1;
+            id += 1;
 
             _liquidacionNegocio.AltaLiquidacion(idEmpleado, periodo, codtransferencia, bruto, descuento, fechaalta, id);
             Console.WriteLine("La liquidacion fue ingresada");
@@ -213,7 +226,6 @@ namespace EstudioContable
             Console.WriteLine("Ingrese el id del empleado:");
             int idEmpleado = Consola.ReadIntFromConsole();
             if (idEmpleado == -1) return;
-            //Console.WriteLine(_categoriaNegocio.GetCategoriaByEmpleado(idEmpleado));
             Empleado empleado = _empleadoNegocio.GetByIdEmpleado(idEmpleado);
             Categoria categoria = _categoriaNegocio.GetByIdCategoria(empleado.IdCategoria);
             Console.WriteLine(categoria.ToString());
@@ -225,13 +237,6 @@ namespace EstudioContable
 
         public void IngresarCategoria()
         {
-            /*Console.WriteLine("Ingrese el id de la categoria:");
-            int id = Convert.ToInt32(Console.ReadLine());
-            while (_categoriaNegocio.ValidarCategoriaExistente(id))
-            {
-                Console.WriteLine("El id ingresado ya existe, pruebe con otro:");
-                id = Convert.ToInt32(Console.ReadLine());
-            }    */
             List<Categoria> listadoCategorias = _categoriaNegocio.GetListaCategoria();
             int id = 0;
             foreach (Categoria categoria in listadoCategorias)
@@ -241,7 +246,7 @@ namespace EstudioContable
                     id = categoria.Id;
                 }
             }
-            id = id + 1;
+            id += 1;
 
             Console.WriteLine("Ingrese el nombre de la categoria:");
             string nombre = Console.ReadLine();
